@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PartnerPro — Internal Documents</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C19A3E;
+    --gold-light: #D4AF5A;
+    --gold-dark: #A07E2E;
+    --gold-glow: rgba(193, 154, 62, 0.15);
+    --dark: #0A0A0A;
+    --dark-mid: #141414;
+    --dark-card: #1A1A1A;
+    --dark-border: #2A2A2A;
+    --cream: #FAF8F3;
+    --text-dim: rgba(255,255,255,0.35);
+    --text-mid: rgba(255,255,255,0.55);
+    --text-bright: rgba(255,255,255,0.9);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--dark);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ====== NOISE TEXTURE OVERLAY ====== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ====== RADIAL BG ====== */
+  .bg-glow {
+    position: fixed;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(193,154,62,0.07) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ====== LAYOUT ====== */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ====== HEADER BAR ====== */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0 0;
+    border-bottom: 1px solid var(--dark-border);
+    padding-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .wordmark {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .wordmark .p { color: white; }
+  .wordmark .r {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .top-bar-meta {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0 60px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-lockup {
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.3s forwards;
+  }
+
+  .hero-lockup h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    color: white;
+    letter-spacing: -2px;
+  }
+
+  .hero-lockup h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.45s forwards;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    max-width: 480px;
+    margin: 0 auto 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  /* ====== DOCUMENT CARDS ====== */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.65s forwards;
+  }
+
+  .doc-card {
+    background: var(--dark-card);
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: background 200ms ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(193,154,62,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .doc-card:hover {
+    background: #1f1f1f;
+  }
+
+  .doc-card:hover::before {
+    opacity: 1;
+  }
+
+  .doc-card-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .doc-card-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    display: block;
+    filter: grayscale(0.3);
+  }
+
+  .doc-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: white;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .doc-card-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-mid);
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 32px;
+  }
+
+  .doc-card-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pill {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: rgba(193,154,62,0.08);
+    color: rgba(193,154,62,0.8);
+    border: 1px solid rgba(193,154,62,0.15);
+  }
+
+  .doc-card-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    position: relative;
+    z-index: 1;
+    transition: gap 200ms ease;
+  }
+
+  .doc-card:hover .doc-card-cta {
+    gap: 16px;
+    color: var(--gold-light);
+  }
+
+  .doc-card-cta-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--dark-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+
+  .doc-card:hover .doc-card-cta-arrow {
+    border-color: var(--gold);
+    background: rgba(193,154,62,0.1);
+    color: var(--gold);
+  }
+
+  /* Hover lift line */
+  .doc-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 300ms ease;
+  }
+
+  .doc-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ====== BOTTOM META ====== */
+  .bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--dark-border);
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.85s forwards;
+  }
+
+  .bottom-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .bottom-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .confidential-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(193,154,62,0.5);
+    border: 1px solid rgba(193,154,62,0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 6px;
+  }
+
+  .confidential-badge::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ====== ANIMATIONS ====== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ====== MOBILE ====== */
+  @media (max-width: 680px) {
+    .page { padding: 0 20px; }
+    .doc-grid { grid-template-columns: 1fr; }
+    .hero-lockup h1 { font-size: 52px; }
+    .top-bar-meta { display: none; }
+    .bottom-bar { flex-direction: column; gap: 16px; text-align: center; }
+    .bottom-meta { text-align: center; }
+    .doc-card { padding: 36px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="page">
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="wordmark">
+      <span class="p">PARTNER</span><span class="r">PRO</span>
+    </div>
+    <div class="top-bar-meta">Internal Documents &mdash; April 2026</div>
+  </header>
+
+  <!-- Hero -->
+  <main class="hero">
+    <div class="hero-eyebrow">Brand &amp; Design Reference</div>
+
+    <div class="hero-lockup">
+      <h1>The <em>Documents.</em></h1>
+    </div>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-sub">
+      Everything that defines how PartnerPro looks, speaks, and feels.
+      Brand strategy for CMOs. Design tokens for developers.
+    </p>
+
+    <!-- Document Cards -->
+    <div class="doc-grid">
+
+      <a class="doc-card" href="brand-direction.html">
+        <div class="doc-card-num">Document 01</div>
+        <span class="doc-card-icon">◈</span>
+        <div class="doc-card-title">Brand Direction</div>
+        <p class="doc-card-desc">
+          The tagline evolution, wordmark refinements, logo variations, app icon specs, and full in-app mockups. Built for the CMO.
+        </p>
+        <div class="doc-card-pills">
+          <span class="pill">Tagline</span>
+          <span class="pill">Wordmark</span>
+          <span class="pill">App Icons</span>
+          <span class="pill">Mockups</span>
+        </div>
+        <div class="doc-card-cta">
+          <span>Open Document</span>
+          <div class="doc-card-cta-arrow">→</div>
+        </div>
+      </a>
+
+      <a class="doc-card" href="design-system.html">
+        <div class="doc-card-num">Document 02</div>
+        <span class="doc-card-icon">⬡</span>
+        <div class="doc-card-title">Design System</div>
+        <p class="doc-card-desc">
+          Every color, typeface, component, spacing token, and Tailwind config. The complete developer reference with zero guesswork.
+        </p>
+        <div class="doc-card-pills">
+          <span class="pill">Colors</span>
+          <span class="pill">Typography</span>
+          <span class="pill">Components</span>
+          <span class="pill">Tailwind</span>
+        </div>
+        <div class="doc-card-cta">
+          <span>Open Document</span>
+          <div class="doc-card-cta-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Bottom Bar -->
+  <footer class="bottom-bar">
+    <div class="bottom-tagline">Your License. Your Territory.</div>
+    <div class="bottom-meta">
+      <div class="confidential-badge">Confidential</div>
+      <div>&copy; 2026 PartnerPro. All rights reserved.</div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

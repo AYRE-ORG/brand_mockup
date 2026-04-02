@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PartnerPro Design System — Developer Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C19A3E;
+    --gold-light: #D4AF5A;
+    --gold-dark: #A07E2E;
+    --dark: #0A0A0A;
+    --dark-card: #1A1A1A;
+    --dark-mid: #141414;
+    --dark-border: #2A2A2A;
+    --cream: #FAF8F3;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-300: #D4D4D4;
+    --gray-400: #A3A3A3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    --info: #3B82F6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--dark); color: white; -webkit-font-smoothing: antialiased; }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+
+  /* Header */
+  .doc-header { margin-bottom: 80px; border-bottom: 1px solid var(--dark-border); padding-bottom: 40px; }
+  .doc-header h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+  .doc-header h1 span { color: var(--gold); }
+  .doc-header p { color: rgba(255,255,255,0.4); font-size: 14px; }
+
+  /* Section */
+  .ds-section { margin-bottom: 80px; }
+  .ds-section-num { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+  .ds-section-title { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .ds-section-desc { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 40px; line-height: 1.6; max-width: 600px; }
+
+  /* Color swatches */
+  .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--dark-border); }
+  .color-swatch-block { height: 80px; }
+  .color-swatch-info { background: var(--dark-card); padding: 12px 14px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .color-swatch-hex { font-size: 12px; font-family: 'SF Mono', 'Fira Code', monospace; color: rgba(255,255,255,0.5); }
+  .color-swatch-var { font-size: 11px; font-family: 'SF Mono', 'Fira Code', monospace; color: var(--gold); margin-top: 2px; display: block; }
+  .color-swatch-use { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+  /* Code blocks */
+  .code-block {
+    background: var(--dark-card); border: 1px solid var(--dark-border);
+    border-radius: 10px; padding: 20px 24px; margin: 16px 0;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.8);
+    overflow-x: auto; white-space: pre;
+  }
+  .code-block .comment { color: rgba(255,255,255,0.3); }
+  .code-block .key { color: var(--gold); }
+  .code-block .val { color: #7DD3FC; }
+  .code-block .str { color: #86EFAC; }
+
+  /* Typography samples */
+  .type-row { display: flex; align-items: baseline; gap: 32px; padding: 20px 0; border-bottom: 1px solid var(--dark-border); }
+  .type-meta { width: 200px; flex-shrink: 0; }
+  .type-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .type-specs { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; line-height: 1.5; font-family: 'SF Mono', monospace; }
+  .type-sample { flex: 1; }
+
+  /* Component showcase */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .comp-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 14px; padding: 32px; }
+  .comp-card.light { background: var(--white); border-color: var(--gray-200); }
+  .comp-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+
+  /* Button samples */
+  .btn-primary {
+    display: inline-block; padding: 14px 32px;
+    background: linear-gradient(135deg, #D4AF5A, #C19A3E, #A07E2E);
+    border: none; border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+    color: white; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .btn-primary-hover {
+    display: inline-block; padding: 14px 32px;
+    background: linear-gradient(135deg, #A07E2E, #8B6B22);
+    border: none; border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+    color: white; letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(193,154,62,0.3);
+  }
+  .btn-secondary {
+    display: inline-block; padding: 14px 32px;
+    background: transparent; border: 1.5px solid var(--gray-300);
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--gray-600); letter-spacing: 0.5px;
+  }
+  .btn-ghost {
+    display: inline-block; padding: 14px 32px;
+    background: transparent; border: 1.5px solid var(--gold);
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.5px;
+  }
+
+  /* Input samples */
+  .input-sample {
+    width: 100%; padding: 14px 18px;
+    background: var(--gray-50); border: 1.5px solid var(--gray-200);
+    border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif;
+    color: #333; margin-bottom: 12px;
+  }
+  .input-focus {
+    width: 100%; padding: 14px 18px;
+    background: var(--white); border: 1.5px solid var(--gold);
+    border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif;
+    color: #333; margin-bottom: 12px;
+    box-shadow: 0 0 0 3px rgba(193,154,62,0.1);
+  }
+  .input-label { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; display: block; }
+
+  /* Card samples */
+  .stat-card-sample {
+    background: var(--gray-50); border-radius: 12px; padding: 20px;
+    border: 1px solid var(--gray-100);
+  }
+  .stat-card-sample .num { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800; color: var(--dark); }
+  .stat-card-sample .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-right: 8px; }
+  .badge-pending { background: rgba(193,154,62,0.1); color: var(--gold); }
+  .badge-active { background: rgba(34,197,94,0.1); color: var(--success); }
+  .badge-error { background: rgba(239,68,68,0.1); color: var(--error); }
+  .badge-info { background: rgba(59,130,246,0.1); color: var(--info); }
+
+  /* Skeleton loader */
+  .skeleton-row { display: flex; gap: 16px; margin-bottom: 16px; }
+  .skeleton-block { background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); border-radius: 8px; background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+  /* Spacing reference */
+  .spacing-grid { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 0; }
+  .spacing-row { display: contents; }
+  .spacing-row > div { padding: 12px 16px; border-bottom: 1px solid var(--dark-border); }
+  .spacing-name { font-family: monospace; font-size: 13px; color: var(--gold); }
+  .spacing-val { font-family: monospace; font-size: 13px; color: rgba(255,255,255,0.6); }
+  .spacing-use { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .spacing-head { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 8px 16px; border-bottom: 1px solid var(--dark-border); }
+
+  /* Shadow samples */
+  .shadow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .shadow-card { background: white; border-radius: 12px; padding: 28px; text-align: center; min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .shadow-label { font-size: 11px; font-weight: 600; color: var(--gray-500); margin-top: 8px; }
+  .shadow-val { font-size: 10px; font-family: monospace; color: var(--gray-400); margin-top: 4px; }
+
+  /* Border radius */
+  .radius-grid { display: flex; gap: 24px; align-items: flex-end; flex-wrap: wrap; }
+  .radius-item { text-align: center; }
+  .radius-box { background: var(--gold); margin-bottom: 8px; }
+  .radius-label { font-size: 10px; font-family: monospace; color: var(--gold); }
+  .radius-use { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 2px; }
+
+  /* Gradient bar */
+  .gradient-bar { height: 60px; border-radius: 12px; margin: 12px 0; }
+
+  /* Table */
+  .ref-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .ref-table th { text-align: left; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); border-bottom: 1px solid var(--dark-border); }
+  .ref-table td { padding: 12px 16px; border-bottom: 1px solid var(--dark-border); font-size: 13px; }
+  .ref-table td:first-child { font-weight: 600; }
+  .ref-table .mono { font-family: 'SF Mono', monospace; font-size: 12px; color: var(--gold); }
+  .ref-table .dim { color: rgba(255,255,255,0.4); }
+
+  .divider { height: 1px; background: var(--dark-border); margin: 0 0 80px; }
+
+  .important-box { background: rgba(193,154,62,0.08); border: 1px solid rgba(193,154,62,0.2); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+  .important-box .imp-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .important-box p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- =========== HEADER =========== -->
+<div class="doc-header">
+  <h1>PARTNER<span>PRO</span> Design System</h1>
+  <p>Developer Reference — Every value. No guessing. April 2026</p>
+</div>
+
+<!-- =========== 01: COLORS =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">01 — Colors</div>
+  <div class="ds-section-title">Color Palette</div>
+  <div class="ds-section-desc">These are the only colors in the app. If a color is not on this list, do not use it.</div>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">Brand Gold</div>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#D4AF5A;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gold Light</div>
+        <div class="color-swatch-hex">#D4AF5A</div>
+        <span class="color-swatch-var">--gold-light</span>
+        <div class="color-swatch-use">Gradient start, highlights</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#C19A3E;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gold (Primary)</div>
+        <div class="color-swatch-hex">#C19A3E</div>
+        <span class="color-swatch-var">--gold</span>
+        <div class="color-swatch-use">Primary brand color, CTAs, accents</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#A07E2E;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gold Dark</div>
+        <div class="color-swatch-hex">#A07E2E</div>
+        <span class="color-swatch-var">--gold-dark</span>
+        <div class="color-swatch-use">Gradient end, hover states</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:rgba(193,154,62,0.15); border: 1px dashed rgba(193,154,62,0.3);"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gold Glow</div>
+        <div class="color-swatch-hex">rgba(193,154,62,0.15)</div>
+        <span class="color-swatch-var">--gold-glow</span>
+        <div class="color-swatch-use">Focus rings, badge backgrounds</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:32px 0 16px;">Dark Scale</div>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#0A0A0A;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Dark (Primary)</div>
+        <div class="color-swatch-hex">#0A0A0A</div>
+        <span class="color-swatch-var">--dark</span>
+        <div class="color-swatch-use">Text, headings, dark backgrounds</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#141414;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Dark Mid</div>
+        <div class="color-swatch-hex">#141414</div>
+        <span class="color-swatch-var">--dark-mid</span>
+        <div class="color-swatch-use">Card backgrounds on dark</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#1A1A1A;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Dark Card</div>
+        <div class="color-swatch-hex">#1A1A1A</div>
+        <span class="color-swatch-var">--dark-card</span>
+        <div class="color-swatch-use">Elevated surfaces on dark</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#2A2A2A;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Dark Border</div>
+        <div class="color-swatch-hex">#2A2A2A</div>
+        <span class="color-swatch-var">--dark-border</span>
+        <div class="color-swatch-use">Borders on dark backgrounds</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:32px 0 16px;">Light Scale (App Interface)</div>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#FFFFFF; border-bottom: 1px solid #eee;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">White</div>
+        <div class="color-swatch-hex">#FFFFFF</div>
+        <span class="color-swatch-var">--white</span>
+        <div class="color-swatch-use">Page backgrounds, cards</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#FAF8F3; border-bottom: 1px solid #eee;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Cream</div>
+        <div class="color-swatch-hex">#FAF8F3</div>
+        <span class="color-swatch-var">--cream</span>
+        <div class="color-swatch-use">Warm backgrounds, login page</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#FAFAFA; border-bottom: 1px solid #eee;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 50</div>
+        <div class="color-swatch-hex">#FAFAFA</div>
+        <span class="color-swatch-var">--gray-50</span>
+        <div class="color-swatch-use">Input backgrounds, stat cards</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#F5F5F5; border-bottom: 1px solid #eee;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 100</div>
+        <div class="color-swatch-hex">#F5F5F5</div>
+        <span class="color-swatch-var">--gray-100</span>
+        <div class="color-swatch-use">Search bars, subtle backgrounds</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#E8E8E8; border-bottom: 1px solid #ddd;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 200</div>
+        <div class="color-swatch-hex">#E8E8E8</div>
+        <span class="color-swatch-var">--gray-200</span>
+        <div class="color-swatch-use">Input borders, dividers</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#A3A3A3;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 400</div>
+        <div class="color-swatch-hex">#A3A3A3</div>
+        <span class="color-swatch-var">--gray-400</span>
+        <div class="color-swatch-use">Placeholder text</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#737373;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 500</div>
+        <div class="color-swatch-hex">#737373</div>
+        <span class="color-swatch-var">--gray-500</span>
+        <div class="color-swatch-use">Secondary text, subtitles</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#525252;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Gray 600</div>
+        <div class="color-swatch-hex">#525252</div>
+        <span class="color-swatch-var">--gray-600</span>
+        <div class="color-swatch-use">Body text on light</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:32px 0 16px;">Status Colors</div>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#22C55E;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Success</div>
+        <div class="color-swatch-hex">#22C55E</div>
+        <span class="color-swatch-var">--success</span>
+        <div class="color-swatch-use">Active, accepted, confirmed</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#F59E0B;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Warning</div>
+        <div class="color-swatch-hex">#F59E0B</div>
+        <span class="color-swatch-var">--warning</span>
+        <div class="color-swatch-use">Pending, needs attention</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#EF4444;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Error</div>
+        <div class="color-swatch-hex">#EF4444</div>
+        <span class="color-swatch-var">--error</span>
+        <div class="color-swatch-use">Rejected, failed, validation</div>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-swatch-block" style="background:#3B82F6;"></div>
+      <div class="color-swatch-info">
+        <div class="color-swatch-name">Info</div>
+        <div class="color-swatch-hex">#3B82F6</div>
+        <span class="color-swatch-var">--info</span>
+        <div class="color-swatch-use">Links, informational alerts</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:32px 0 16px;">Gradients</div>
+  <div class="gradient-bar" style="background: linear-gradient(135deg, #D4AF5A, #C19A3E, #A07E2E);"></div>
+  <div class="code-block"><span class="comment">/* Primary Gold Gradient — all CTA buttons */</span>
+<span class="key">background</span>: <span class="val">linear-gradient(135deg, #D4AF5A, #C19A3E, #A07E2E)</span>;
+
+<span class="comment">/* Gold Gradient Hover — darkened on hover */</span>
+<span class="key">background</span>: <span class="val">linear-gradient(135deg, #A07E2E, #8B6B22)</span>;
+<span class="key">box-shadow</span>: <span class="val">0 4px 16px rgba(193, 154, 62, 0.3)</span>;
+
+<span class="comment">/* Gold Accent Line — used below logo */</span>
+<span class="key">background</span>: <span class="val">linear-gradient(90deg, transparent, #C19A3E, transparent)</span>;</div>
+
+  <div class="important-box">
+    <div class="imp-title">Rule</div>
+    <p>Never use raw gold (#C19A3E) as a flat background on buttons. Always use the gradient. Flat gold looks cheap. Gradient gold looks premium. The gradient catches light and adds dimension.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 02: TYPOGRAPHY =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">02 — Typography</div>
+  <div class="ds-section-title">Font System</div>
+  <div class="ds-section-desc">Three fonts. Each has a specific job. Do not mix their roles.</div>
+
+  <div class="code-block"><span class="comment">/* Import in index.html or CSS */</span>
+<span class="key">@import url</span>(<span class="str">'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap'</span>);
+
+<span class="comment">/* Tailwind config (tailwind.config.js) */</span>
+<span class="key">fontFamily</span>: {
+  <span class="key">heading</span>: <span class="str">['Montserrat', 'sans-serif']</span>,    <span class="comment">// UI headings, labels, nav, buttons, stats</span>
+  <span class="key">display</span>: <span class="str">['Playfair Display', 'serif']</span>,  <span class="comment">// Hero text, greeting, emotional moments</span>
+  <span class="key">body</span>:    <span class="str">['Inter', 'sans-serif']</span>,          <span class="comment">// Body text, descriptions, form labels</span>
+}</div>
+
+  <div style="margin-top:40px;">
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Page Title</div>
+        <div class="type-specs">Playfair Display<br>28-32px / 700<br>line-height: 1.15<br>color: #0A0A0A</div>
+      </div>
+      <div class="type-sample" style="font-family:'Playfair Display',serif; font-size:30px; font-weight:700; line-height:1.15;">Hello, Himiko Sadiki</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Section Heading</div>
+        <div class="type-specs">Montserrat<br>20-24px / 800<br>line-height: 1.2<br>color: #0A0A0A</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:22px; font-weight:800; line-height:1.2;">Recent Activity</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Card Heading</div>
+        <div class="type-specs">Montserrat<br>16-18px / 700<br>line-height: 1.3<br>color: #0A0A0A</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:17px; font-weight:700; line-height:1.3;">2316 Cup Dr, Plano, TX 75074</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Price Display</div>
+        <div class="type-specs">Montserrat<br>28-32px / 800<br>line-height: 1<br>color: #0A0A0A</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:30px; font-weight:800; line-height:1;">$539,000</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Stat Number</div>
+        <div class="type-specs">Montserrat<br>32-36px / 800<br>line-height: 1<br>color: #0A0A0A</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:34px; font-weight:800; line-height:1;">12</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Stat Label</div>
+        <div class="type-specs">Montserrat<br>11px / 600<br>letter-spacing: 1px<br>text-transform: uppercase<br>color: #C19A3E</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:#C19A3E;">Active Clients</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Body Text</div>
+        <div class="type-specs">Inter<br>16px / 400<br>line-height: 1.6<br>color: #525252</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif; font-size:16px; font-weight:400; line-height:1.6; color:#aaa;">Stunning 4-bedroom brick home with spacious layout, modern kitchen with granite countertops, hardwood floors throughout.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Small / Caption</div>
+        <div class="type-specs">Inter<br>13px / 400<br>line-height: 1.5<br>color: #A3A3A3</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif; font-size:13px; font-weight:400; line-height:1.5; color:#777;">3,159 sqft · 4 bed · 3 bath</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Nav Link</div>
+        <div class="type-specs">Inter<br>14px / 500<br>Active: #C19A3E<br>Inactive: #A3A3A3</div>
+      </div>
+      <div class="type-sample"><span style="font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#C19A3E; margin-right:24px;">Dashboard</span><span style="font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#777;">Search</span><span style="font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:#777; margin-left:24px;">Offers</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-label">Button Text</div>
+        <div class="type-specs">Montserrat<br>14px / 700<br>letter-spacing: 1px<br>text-transform: uppercase<br>color: #FFFFFF</div>
+      </div>
+      <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">SIGN IN</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 03: COMPONENTS =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">03 — Components</div>
+  <div class="ds-section-title">UI Components</div>
+  <div class="ds-section-desc">Every interactive element has exact specs. Build to match.</div>
+
+  <div class="comp-grid">
+    <!-- Buttons -->
+    <div class="comp-card light">
+      <div class="comp-label">Buttons</div>
+      <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+        <div class="btn-primary">Primary Action</div>
+        <div class="btn-primary-hover">Primary Hover</div>
+        <div class="btn-secondary">Secondary</div>
+        <div class="btn-ghost">Ghost / Outline</div>
+      </div>
+      <div class="code-block" style="margin-top:16px; font-size:11px; background:#f5f5f5; color:#333; border-color:#e8e8e8;"><span style="color:#999;">/* Primary Button */</span>
+padding: 14px 32px
+border-radius: 10px
+font: Montserrat 14px/700
+letter-spacing: 1px
+text-transform: uppercase
+background: linear-gradient(135deg, #D4AF5A, #C19A3E, #A07E2E)
+transition: all 150ms ease
+
+<span style="color:#999;">/* Hover */</span>
+background: linear-gradient(135deg, #A07E2E, #8B6B22)
+box-shadow: 0 4px 16px rgba(193,154,62,0.3)</div>
+    </div>
+
+    <!-- Inputs -->
+    <div class="comp-card light">
+      <div class="comp-label">Form Inputs</div>
+      <span class="input-label" style="color:#333;">Email Address</span>
+      <div class="input-sample" style="color:#A3A3A3;">agent@email.com</div>
+      <span class="input-label" style="color:#333;">Password (focused)</span>
+      <div class="input-focus" style="color:#333;">••••••••••••</div>
+      <div class="code-block" style="margin-top:16px; font-size:11px; background:#f5f5f5; color:#333; border-color:#e8e8e8;"><span style="color:#999;">/* Default Input */</span>
+padding: 14px 18px
+background: #FAFAFA
+border: 1.5px solid #E8E8E8
+border-radius: 10px
+font: Inter 14px/400
+color: #0A0A0A
+placeholder-color: #A3A3A3
+
+<span style="color:#999;">/* Focused Input */</span>
+background: #FFFFFF
+border: 1.5px solid #C19A3E
+box-shadow: 0 0 0 3px rgba(193,154,62,0.1)
+
+<span style="color:#999;">/* Error Input */</span>
+border: 1.5px solid #EF4444
+box-shadow: 0 0 0 3px rgba(239,68,68,0.1)</div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="comp-card light">
+      <div class="comp-label">Stat Cards</div>
+      <div style="display:flex; gap:12px;">
+        <div class="stat-card-sample" style="flex:1;">
+          <div class="num">12</div>
+          <div class="label">Active Clients</div>
+        </div>
+        <div class="stat-card-sample" style="flex:1;">
+          <div class="num">5</div>
+          <div class="label">Pending Offers</div>
+        </div>
+      </div>
+      <div class="code-block" style="margin-top:16px; font-size:11px; background:#f5f5f5; color:#333; border-color:#e8e8e8;"><span style="color:#999;">/* Stat Card */</span>
+background: #FAFAFA
+border: 1px solid #F5F5F5
+border-radius: 12px
+padding: 20px
+
+<span style="color:#999;">/* Stat Number */</span>
+font: Montserrat 32px/800
+color: #0A0A0A
+
+<span style="color:#999;">/* Stat Label */</span>
+font: Montserrat 11px/600
+letter-spacing: 1px
+text-transform: uppercase
+color: #C19A3E</div>
+    </div>
+
+    <!-- Status Badges -->
+    <div class="comp-card light">
+      <div class="comp-label">Status Badges</div>
+      <div style="margin-bottom:16px;">
+        <span class="badge badge-pending" style="color:#A07E2E;">Pending</span>
+        <span class="badge badge-active" style="color:#16A34A;">Active</span>
+        <span class="badge badge-error" style="color:#DC2626;">Rejected</span>
+        <span class="badge badge-info" style="color:#2563EB;">Submitted</span>
+      </div>
+      <div class="code-block" style="font-size:11px; background:#f5f5f5; color:#333; border-color:#e8e8e8;"><span style="color:#999;">/* Badge Base */</span>
+padding: 4px 12px
+border-radius: 100px
+font: Inter 11px/600
+letter-spacing: 0.5px
+text-transform: uppercase
+
+<span style="color:#999;">/* Pending */</span>  bg: rgba(193,154,62,0.1)  text: #A07E2E
+<span style="color:#999;">/* Active */</span>   bg: rgba(34,197,94,0.1)   text: #16A34A
+<span style="color:#999;">/* Error */</span>    bg: rgba(239,68,68,0.1)   text: #DC2626
+<span style="color:#999;">/* Info */</span>     bg: rgba(59,130,246,0.1)  text: #2563EB</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 04: SPACING =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">04 — Spacing &amp; Layout</div>
+  <div class="ds-section-title">Spacing Scale</div>
+  <div class="ds-section-desc">Use Tailwind classes. These map directly to the spacing system.</div>
+
+  <table class="ref-table">
+    <thead>
+      <tr><th>Token</th><th>Value</th><th>Tailwind</th><th>Use</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono">xs</td><td>4px</td><td class="mono">p-1, m-1, gap-1</td><td class="dim">Icon padding, tight gaps</td></tr>
+      <tr><td class="mono">sm</td><td>8px</td><td class="mono">p-2, m-2, gap-2</td><td class="dim">Between related elements</td></tr>
+      <tr><td class="mono">md</td><td>16px</td><td class="mono">p-4, m-4, gap-4</td><td class="dim">Card padding, section gaps</td></tr>
+      <tr><td class="mono">lg</td><td>24px</td><td class="mono">p-6, m-6, gap-6</td><td class="dim">Between sections, card internal</td></tr>
+      <tr><td class="mono">xl</td><td>32px</td><td class="mono">p-8, m-8, gap-8</td><td class="dim">Page horizontal padding, major gaps</td></tr>
+      <tr><td class="mono">2xl</td><td>48px</td><td class="mono">p-12, m-12</td><td class="dim">Section vertical padding</td></tr>
+      <tr><td class="mono">3xl</td><td>64px</td><td class="mono">p-16, m-16</td><td class="dim">Page top/bottom margin</td></tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:40px 0 16px;">Border Radius</div>
+  <table class="ref-table">
+    <thead>
+      <tr><th>Element</th><th>Radius</th><th>Tailwind</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Buttons</td><td class="mono">10px</td><td class="mono">rounded-[10px]</td></tr>
+      <tr><td>Input Fields</td><td class="mono">10px</td><td class="mono">rounded-[10px]</td></tr>
+      <tr><td>Cards</td><td class="mono">12px</td><td class="mono">rounded-xl</td></tr>
+      <tr><td>Property Cards</td><td class="mono">14px</td><td class="mono">rounded-[14px]</td></tr>
+      <tr><td>Modals / Dialogs</td><td class="mono">16px</td><td class="mono">rounded-2xl</td></tr>
+      <tr><td>Badges / Pills</td><td class="mono">100px</td><td class="mono">rounded-full</td></tr>
+      <tr><td>Avatars</td><td class="mono">50%</td><td class="mono">rounded-full</td></tr>
+      <tr><td>App Icon (PWA)</td><td class="mono">22px</td><td class="mono">rounded-[22px]</td></tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:40px 0 16px;">Box Shadows</div>
+  <table class="ref-table">
+    <thead>
+      <tr><th>Level</th><th>CSS Value</th><th>Use</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Subtle</td><td class="mono">0 1px 3px rgba(0,0,0,0.04)</td><td class="dim">Default card resting state</td></tr>
+      <tr><td>Medium</td><td class="mono">0 2px 12px rgba(0,0,0,0.06)</td><td class="dim">Card hover state, property cards</td></tr>
+      <tr><td>Elevated</td><td class="mono">0 4px 24px rgba(0,0,0,0.08)</td><td class="dim">Modals, dropdowns, floating elements</td></tr>
+      <tr><td>Gold Glow</td><td class="mono">0 4px 16px rgba(193,154,62,0.3)</td><td class="dim">Button hover, focused gold elements</td></tr>
+      <tr><td>Phone Frame</td><td class="mono">0 20px 60px rgba(0,0,0,0.4)</td><td class="dim">Marketing mockups only</td></tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:40px 0 16px;">Transitions</div>
+  <div class="code-block"><span class="comment">/* All interactive hover states */</span>
+<span class="key">transition</span>: <span class="val">all 150ms ease</span>;
+
+<span class="comment">/* Card hover elevation */</span>
+<span class="key">.card:hover</span> {
+  <span class="key">box-shadow</span>: <span class="val">0 2px 12px rgba(0,0,0,0.06)</span>;
+  <span class="key">transform</span>: <span class="val">translateY(-1px)</span>;
+}
+
+<span class="comment">/* Button hover */</span>
+<span class="key">.btn-primary:hover</span> {
+  <span class="key">background</span>: <span class="val">linear-gradient(135deg, #A07E2E, #8B6B22)</span>;
+  <span class="key">box-shadow</span>: <span class="val">0 4px 16px rgba(193,154,62,0.3)</span>;
+}</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 05: SKELETON LOADERS =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">05 — Loading States</div>
+  <div class="ds-section-title">Skeleton Loaders</div>
+  <div class="ds-section-desc">Every data-dependent screen shows a branded skeleton while loading. No spinners. No blank screens.</div>
+
+  <div class="comp-card light" style="max-width:600px;">
+    <div class="comp-label">Property Card Skeleton</div>
+    <div class="skeleton-row"><div class="skeleton-block" style="width:100%; height:160px;"></div></div>
+    <div class="skeleton-row"><div class="skeleton-block" style="width:40%; height:24px;"></div></div>
+    <div class="skeleton-row"><div class="skeleton-block" style="width:70%; height:14px;"></div></div>
+    <div class="skeleton-row"><div class="skeleton-block" style="width:50%; height:14px;"></div></div>
+  </div>
+
+  <div class="code-block" style="margin-top:20px;"><span class="comment">/* Skeleton shimmer animation */</span>
+<span class="key">@keyframes shimmer</span> {
+  <span class="val">0%</span>   { background-position: 200% 0; }
+  <span class="val">100%</span> { background-position: -200% 0; }
+}
+
+<span class="key">.skeleton</span> {
+  <span class="key">background</span>: <span class="val">linear-gradient(90deg, #F0F0F0 25%, #E8E8E8 50%, #F0F0F0 75%)</span>;
+  <span class="key">background-size</span>: <span class="val">200% 100%</span>;
+  <span class="key">animation</span>: <span class="val">shimmer 1.5s infinite</span>;
+  <span class="key">border-radius</span>: <span class="val">8px</span>;
+}</div>
+
+  <div class="important-box">
+    <div class="imp-title">Rule</div>
+    <p>The skeleton must match the layout of the content it replaces. Property card skeleton = image block + price line + address line + specs line. Dashboard stat skeleton = number block + label block. Zero layout shift when data loads.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 06: EMPTY STATES =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">06 — Empty States</div>
+  <div class="ds-section-title">When There's No Data</div>
+  <div class="ds-section-desc">Every page that can be empty must have a designed state. These are opportunities, not dead ends.</div>
+
+  <table class="ref-table">
+    <thead>
+      <tr><th>Page</th><th>Message</th><th>CTA Button</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Saved Properties</td><td class="dim">You haven't saved any homes yet.</td><td class="mono">Start Searching</td></tr>
+      <tr><td>Scheduled Showings</td><td class="dim">No showings scheduled. Find a property you'd like to see.</td><td class="mono">Browse Properties</td></tr>
+      <tr><td>Offers</td><td class="dim">You haven't submitted any offers yet.</td><td class="mono">Search Properties</td></tr>
+      <tr><td>Agent Clients</td><td class="dim">No buyers yet. Share your invite link to get started.</td><td class="mono">Generate Invite Link</td></tr>
+      <tr><td>Agent Showings</td><td class="dim">No showings to manage. Your clients haven't scheduled any yet.</td><td class="mono">View Clients</td></tr>
+      <tr><td>Notifications</td><td class="dim">You're all caught up. No new notifications.</td><td class="mono">—</td></tr>
+      <tr><td>Search Results</td><td class="dim">No properties found. Try expanding your filters.</td><td class="mono">Clear Filters</td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-block"><span class="comment">/* Empty State Layout */</span>
+<span class="key">.empty-state</span> {
+  <span class="key">text-align</span>: <span class="val">center</span>;
+  <span class="key">padding</span>: <span class="val">60px 24px</span>;
+  <span class="key">max-width</span>: <span class="val">400px</span>;
+  <span class="key">margin</span>: <span class="val">0 auto</span>;
+}
+<span class="key">.empty-state-icon</span>    { <span class="key">font-size</span>: <span class="val">48px</span>; <span class="key">margin-bottom</span>: <span class="val">16px</span>; <span class="key">opacity</span>: <span class="val">0.3</span>; }
+<span class="key">.empty-state-message</span> { <span class="key">font</span>: <span class="val">Inter 16px/400</span>; <span class="key">color</span>: <span class="val">#A3A3A3</span>; <span class="key">margin-bottom</span>: <span class="val">24px</span>; }
+<span class="key">.empty-state-cta</span>     { <span class="comment">/* Use btn-primary styles */</span> }</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 07: LAYOUT =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">07 — Layout Rules</div>
+  <div class="ds-section-title">Page Structure</div>
+  <div class="ds-section-desc">Non-negotiable layout rules for every screen.</div>
+
+  <table class="ref-table">
+    <thead>
+      <tr><th>Rule</th><th>Spec</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Max content width</td><td class="mono">1200px (centered)</td></tr>
+      <tr><td>Page horizontal padding</td><td class="mono">32px (desktop), 16px (mobile)</td></tr>
+      <tr><td>Desktop header height</td><td class="mono">64px</td></tr>
+      <tr><td>Mobile bottom nav height</td><td class="mono">56px</td></tr>
+      <tr><td>Search results grid</td><td class="mono">3 columns (1200px+), 2 columns (768px+), 1 column (mobile)</td></tr>
+      <tr><td>Property card gap</td><td class="mono">16px (gap-4)</td></tr>
+      <tr><td>Section vertical spacing</td><td class="mono">48px between major sections</td></tr>
+      <tr><td>Footer position</td><td class="mono">Always below content — never floating mid-page</td></tr>
+      <tr><td>AI chat bubble position</td><td class="mono">fixed, bottom: 24px, right: 24px (z-index: 50)</td></tr>
+      <tr><td>AI chat bubble size</td><td class="mono">56px circle, 3px gold border, agent photo inside</td></tr>
+      <tr><td>Mobile breakpoint</td><td class="mono">768px</td></tr>
+      <tr><td>Tablet breakpoint</td><td class="mono">1024px</td></tr>
+    </tbody>
+  </table>
+
+  <div class="important-box">
+    <div class="imp-title">Zero Dead Space Rule</div>
+    <p>If a section has no data, hide it entirely. Do not render an empty container. The footer must always sit directly below the last visible content section. Test every page by scrolling to the bottom — if there is more than 40px of empty space between the last content and the footer, it is a bug.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== 08: TAILWIND CONFIG =========== -->
+<div class="ds-section">
+  <div class="ds-section-num">08 — Tailwind Config</div>
+  <div class="ds-section-title">Copy-Paste Config</div>
+  <div class="ds-section-desc">Add this to your tailwind.config.js. This is the source of truth for the entire design system.</div>
+
+  <div class="code-block"><span class="comment">// tailwind.config.js — PartnerPro Design System</span>
+module.exports = {
+  theme: {
+    extend: {
+      <span class="key">colors</span>: {
+        <span class="key">gold</span>: {
+          <span class="key">light</span>: <span class="str">'#D4AF5A'</span>,
+          <span class="key">DEFAULT</span>: <span class="str">'#C19A3E'</span>,
+          <span class="key">dark</span>: <span class="str">'#A07E2E'</span>,
+          <span class="key">glow</span>: <span class="str">'rgba(193, 154, 62, 0.15)'</span>,
+        },
+        <span class="key">dark</span>: {
+          <span class="key">DEFAULT</span>: <span class="str">'#0A0A0A'</span>,
+          <span class="key">mid</span>: <span class="str">'#141414'</span>,
+          <span class="key">card</span>: <span class="str">'#1A1A1A'</span>,
+          <span class="key">border</span>: <span class="str">'#2A2A2A'</span>,
+        },
+        <span class="key">cream</span>: <span class="str">'#FAF8F3'</span>,
+        <span class="key">success</span>: <span class="str">'#22C55E'</span>,
+        <span class="key">warning</span>: <span class="str">'#F59E0B'</span>,
+        <span class="key">error</span>: <span class="str">'#EF4444'</span>,
+        <span class="key">info</span>: <span class="str">'#3B82F6'</span>,
+      },
+      <span class="key">fontFamily</span>: {
+        <span class="key">heading</span>: [<span class="str">'Montserrat'</span>, <span class="str">'sans-serif'</span>],
+        <span class="key">display</span>: [<span class="str">'Playfair Display'</span>, <span class="str">'serif'</span>],
+        <span class="key">body</span>: [<span class="str">'Inter'</span>, <span class="str">'sans-serif'</span>],
+      },
+      <span class="key">borderRadius</span>: {
+        <span class="key">'btn'</span>: <span class="str">'10px'</span>,
+        <span class="key">'input'</span>: <span class="str">'10px'</span>,
+        <span class="key">'card'</span>: <span class="str">'12px'</span>,
+        <span class="key">'property'</span>: <span class="str">'14px'</span>,
+        <span class="key">'modal'</span>: <span class="str">'16px'</span>,
+        <span class="key">'app-icon'</span>: <span class="str">'22px'</span>,
+      },
+      <span class="key">boxShadow</span>: {
+        <span class="key">'subtle'</span>: <span class="str">'0 1px 3px rgba(0,0,0,0.04)'</span>,
+        <span class="key">'card'</span>: <span class="str">'0 2px 12px rgba(0,0,0,0.06)'</span>,
+        <span class="key">'elevated'</span>: <span class="str">'0 4px 24px rgba(0,0,0,0.08)'</span>,
+        <span class="key">'gold'</span>: <span class="str">'0 4px 16px rgba(193,154,62,0.3)'</span>,
+      },
+    },
+  },
+}</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========== FOOTER =========== -->
+<div style="text-align:center; padding:40px 0 60px;">
+  <div style="font-family:'Montserrat',sans-serif; font-size:22px; font-weight:800; margin-bottom:8px;">PARTNER<span style="color:#C19A3E;">PRO</span></div>
+  <div style="width:40px; height:1.5px; background:#C19A3E; margin:0 auto 12px;"></div>
+  <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:20px;">YOUR LICENSE. YOUR TERRITORY.</div>
+  <div style="font-size:12px; color:rgba(255,255,255,0.2);">&copy; 2026 PartnerPro. Design System v1.0 — Developer Reference.</div>
+</div>
+
+</div>
+</body>
+</html>

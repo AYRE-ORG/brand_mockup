@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PartnerPro — Brand Direction</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C19A3E;
+    --gold-light: #D4AF5A;
+    --gold-dark: #A07E2E;
+    --gold-glow: rgba(193, 154, 62, 0.15);
+    --dark: #0A0A0A;
+    --dark-mid: #141414;
+    --dark-card: #1A1A1A;
+    --dark-border: #2A2A2A;
+    --cream: #FAF8F3;
+    --text-dim: rgba(255,255,255,0.4);
+    --text-mid: rgba(255,255,255,0.6);
+    --text-bright: rgba(255,255,255,0.9);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--dark);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* =========== HERO =========== */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 30%, rgba(193,154,62,0.08) 0%, transparent 60%),
+                var(--dark);
+    padding: 80px 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .hero-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 60px;
+  }
+
+  .hero-wordmark {
+    margin-bottom: 32px;
+  }
+  .hero-wordmark .partner {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 86px; font-weight: 800; letter-spacing: -2px;
+    color: white;
+  }
+  .hero-wordmark .pro {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 86px; font-weight: 800; letter-spacing: -2px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-line {
+    width: 60px; height: 2px; margin: 0 auto 24px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  .hero-year {
+    position: absolute; bottom: 40px;
+    font-size: 11px; letter-spacing: 4px; color: var(--text-dim);
+  }
+
+  /* =========== SECTIONS =========== */
+  .section {
+    padding: 120px 80px;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dark-border), transparent);
+    max-width: 1400px; margin: 0 auto;
+  }
+
+  .section-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 5px;
+    color: var(--gold); margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 700; line-height: 1.15;
+    color: white; margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .section-subtitle {
+    font-size: 17px; line-height: 1.7; color: var(--text-mid);
+    max-width: 580px; margin-bottom: 60px;
+  }
+
+  /* =========== TAGLINE SECTION =========== */
+  .tagline-display {
+    background: var(--dark-mid);
+    border: 1px solid var(--dark-border);
+    border-radius: 24px;
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .tagline-display::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(193,154,62,0.1) 0%, transparent 70%);
+  }
+
+  .tagline-old {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 8px;
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.15);
+  }
+
+  .tagline-arrow {
+    font-size: 24px; color: var(--gold); margin: 16px 0 24px;
+    opacity: 0.5;
+  }
+
+  .tagline-new {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px; font-weight: 700; line-height: 1.1;
+    color: white; position: relative; z-index: 1;
+  }
+  .tagline-new span {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline-context {
+    font-size: 16px; color: var(--text-dim); margin-top: 30px;
+    font-style: italic; position: relative; z-index: 1;
+    max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;
+  }
+
+  /* =========== LOGO COMPARISON =========== */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    border-radius: 24px; overflow: hidden; margin-bottom: 40px;
+  }
+
+  .compare-card {
+    padding: 80px 60px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative;
+    min-height: 360px;
+  }
+
+  .compare-card.before { background: #111; }
+  .compare-card.after { background: var(--dark-mid); }
+
+  .compare-badge {
+    position: absolute; top: 24px; left: 24px;
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px;
+  }
+  .compare-badge.dim { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+  .compare-badge.gold { background: rgba(193,154,62,0.15); color: var(--gold); }
+
+  /* Current logo */
+  .logo-current {
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 14px 28px; display: inline-block; margin-bottom: 14px;
+  }
+  .logo-current .p { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 800; color: rgba(255,255,255,0.7); }
+  .logo-current .r { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 800; color: rgba(193,154,62,0.7); }
+  .tagline-current-small { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+
+  /* Refined logo */
+  .logo-refined { display: inline-block; margin-bottom: 16px; }
+  .logo-refined .p {
+    font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800;
+    letter-spacing: -1px; color: white;
+  }
+  .logo-refined .r {
+    font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gold-line-thin { width: 40px; height: 1.5px; background: var(--gold); margin: 0 auto 12px; }
+  .tagline-refined-small {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-mid); font-weight: 600;
+  }
+
+  /* =========== WHAT CHANGED =========== */
+  .changes-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    border-radius: 16px; overflow: hidden; margin-bottom: 40px;
+  }
+
+  .change-item {
+    background: var(--dark-mid); padding: 40px 28px; text-align: center;
+  }
+  .change-icon { font-size: 28px; margin-bottom: 16px; display: block; color: var(--gold); }
+  .change-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white; margin-bottom: 8px; }
+  .change-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+  /* =========== VARIATIONS =========== */
+  .var-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    border-radius: 20px; overflow: hidden; margin-bottom: 40px;
+  }
+
+  .var-item {
+    padding: 60px 40px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 280px;
+    position: relative;
+  }
+  .var-item.light { background: var(--cream); }
+  .var-item.dark { background: var(--dark-card); }
+  .var-item.gradient {
+    background: linear-gradient(135deg, var(--dark), #1a1510);
+  }
+
+  .var-item .var-name {
+    position: absolute; bottom: 20px;
+    font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  }
+  .var-item.light .var-name { color: rgba(0,0,0,0.3); }
+  .var-item.dark .var-name { color: var(--text-dim); }
+  .var-item.gradient .var-name { color: var(--text-dim); }
+
+  /* Light version colors */
+  .var-item.light .logo-refined .p { color: var(--dark); -webkit-text-fill-color: var(--dark); }
+  .var-item.light .tagline-refined-small { color: rgba(0,0,0,0.4); }
+
+  /* Stacked logo */
+  .logo-stacked { text-align: center; }
+  .logo-stacked .top {
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 10px; text-transform: uppercase; color: var(--text-mid);
+    display: block;
+  }
+  .logo-stacked .bottom {
+    font-family: 'Montserrat', sans-serif; font-size: 56px; font-weight: 900;
+    letter-spacing: -2px; display: block; line-height: 1;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .var-item.light .logo-stacked .top { color: rgba(0,0,0,0.4); }
+
+  /* =========== APP ICONS =========== */
+  .icon-row {
+    display: flex; gap: 40px; align-items: flex-end; justify-content: center;
+    margin-bottom: 60px; flex-wrap: wrap;
+  }
+
+  .icon-item { text-align: center; }
+
+  .icon-circle {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800;
+    color: white; letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .icon-rounded {
+    width: 100px; height: 100px; border-radius: 22px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800;
+    color: white; letter-spacing: -1px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 32px rgba(193,154,62,0.3);
+  }
+
+  .icon-dark {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: var(--dark-card);
+    border: 2px solid var(--dark-border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  .icon-dark span {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .icon-minimal {
+    width: 100px; height: 100px; border-radius: 22px;
+    background: var(--dark);
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  .icon-minimal span {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .icon-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+  .icon-label.rec { color: var(--gold); }
+
+  /* =========== IN-APP MOCKUPS =========== */
+  .mockup-container {
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 40px;
+    align-items: start;
+  }
+
+  .browser-mock {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .browser-chrome {
+    background: #111; padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot.r { background: #ff5f57; }
+  .browser-dot.y { background: #febc2e; }
+  .browser-dot.g { background: #28c840; }
+  .browser-url {
+    flex: 1; margin-left: 12px; background: rgba(255,255,255,0.05);
+    border-radius: 6px; padding: 6px 14px;
+    font-size: 12px; color: var(--text-dim);
+  }
+
+  .browser-body { background: white; }
+
+  /* Dashboard mockup */
+  .dash-header {
+    background: white; padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .dash-logo { display: flex; align-items: center; }
+  .dash-logo .p { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: #0A0A0A; }
+  .dash-logo .r { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--gold); }
+
+  .dash-nav { display: flex; gap: 24px; }
+  .dash-nav span { font-size: 13px; color: #999; font-weight: 500; }
+  .dash-nav span.active { color: var(--gold); }
+
+  .dash-content { padding: 32px; }
+  .dash-greeting { font-family: 'Playfair Display', serif; font-size: 28px; color: #0A0A0A; margin-bottom: 24px; }
+  .dash-greeting span { color: var(--gold); }
+
+  .dash-stats { display: flex; gap: 16px; margin-bottom: 24px; }
+  .dash-stat {
+    flex: 1; background: #fafafa; border-radius: 12px; padding: 20px;
+    border: 1px solid #f0f0f0;
+  }
+  .dash-stat-num {
+    font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800;
+    color: #0A0A0A;
+  }
+  .dash-stat-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--gold); margin-top: 4px;
+  }
+
+  .dash-activity-label {
+    font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: #ccc; margin-bottom: 12px;
+  }
+  .dash-activity-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #f5f5f5;
+  }
+  .dash-activity-row .left { display: flex; align-items: center; gap: 12px; }
+  .dash-activity-row .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #ddd, #eee);
+  }
+  .dash-activity-row .name { font-size: 14px; font-weight: 600; color: #0A0A0A; }
+  .dash-activity-row .detail { font-size: 12px; color: #999; }
+  .dash-activity-row .amount { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: #0A0A0A; }
+  .dash-activity-row .status {
+    font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px;
+    background: rgba(193,154,62,0.1); color: var(--gold);
+  }
+
+  /* Mobile mockup */
+  .phone-mock {
+    width: 280px; margin: 0 auto;
+    background: #0A0A0A;
+    border-radius: 40px;
+    padding: 14px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 2px var(--dark-border);
+  }
+
+  .phone-notch {
+    width: 120px; height: 24px; background: #0A0A0A;
+    border-radius: 0 0 16px 16px; margin: 0 auto 0;
+    position: relative; z-index: 2; margin-top: -2px;
+  }
+
+  .phone-screen {
+    background: white; border-radius: 30px; overflow: hidden;
+    min-height: 520px; display: flex; flex-direction: column;
+  }
+
+  .phone-header {
+    padding: 14px 20px 10px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .phone-header .p { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: #0A0A0A; }
+  .phone-header .r { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: var(--gold); }
+  .phone-header-icons { display: flex; gap: 12px; }
+  .phone-header-icon { width: 20px; height: 20px; border-radius: 50%; background: #f0f0f0; }
+
+  .phone-body { flex: 1; padding: 16px; }
+
+  .phone-search {
+    background: #f5f5f5; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: #bbb;
+  }
+  .phone-search-icon { width: 14px; height: 14px; border: 2px solid #ccc; border-radius: 50%; }
+
+  .phone-card {
+    border-radius: 14px; overflow: hidden; margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #f0f0f0;
+  }
+  .phone-card-img {
+    height: 100px;
+    background: linear-gradient(135deg, #e8e0d4, #d4cfc6);
+    position: relative;
+  }
+  .phone-card-heart {
+    position: absolute; top: 8px; right: 8px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .phone-card-info { padding: 12px 14px; }
+  .phone-card-price { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: #0A0A0A; }
+  .phone-card-addr { font-size: 12px; color: #999; margin-top: 3px; }
+  .phone-card-specs { display: flex; gap: 10px; margin-top: 6px; font-size: 11px; color: #666; }
+
+  .phone-bottom-nav {
+    display: flex; justify-content: space-around; padding: 10px 0 6px;
+    border-top: 1px solid #f0f0f0; background: white;
+  }
+  .phone-nav-item { text-align: center; }
+  .phone-nav-dot { width: 4px; height: 4px; border-radius: 50%; margin: 0 auto; }
+  .phone-nav-dot.active { background: var(--gold); }
+  .phone-nav-dot.inactive { background: transparent; }
+  .phone-nav-label { font-size: 9px; margin-top: 4px; }
+  .phone-nav-label.active { color: var(--gold); font-weight: 600; }
+  .phone-nav-label.inactive { color: #ccc; }
+
+  /* Chat bubble */
+  .phone-chat-bubble {
+    position: absolute; bottom: 70px; right: 20px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #0A0A0A; border: 2.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .phone-chat-bubble span {
+    font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800;
+    color: var(--gold);
+  }
+
+  /* =========== LOGIN MOCK =========== */
+  .login-mock-container {
+    margin-top: 60px;
+  }
+
+  .login-browser {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .login-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+
+  .login-image {
+    background: linear-gradient(135deg, #2a2318 0%, #1a1510 50%, #0f0d09 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 40px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .login-image::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(193,154,62,0.12) 0%, transparent 70%);
+  }
+  .login-image .big-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700; line-height: 1.2;
+    color: white; position: relative; z-index: 1;
+  }
+  .login-image .big-tagline span { color: var(--gold); }
+  .login-image .login-sub {
+    font-size: 14px; color: var(--text-dim); margin-top: 16px;
+    line-height: 1.6; position: relative; z-index: 1;
+  }
+
+  .login-form-side {
+    background: white; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 60px 50px;
+  }
+  .login-form-logo { margin-bottom: 32px; }
+  .login-form-logo .p { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: #0A0A0A; }
+  .login-form-logo .r { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--gold); }
+  .login-form-title { font-family: 'Playfair Display', serif; font-size: 28px; color: #0A0A0A; margin-bottom: 8px; }
+  .login-form-sub { font-size: 14px; color: #999; margin-bottom: 32px; }
+
+  .login-input {
+    width: 100%; max-width: 320px; padding: 14px 18px;
+    border: 1.5px solid #e8e8e8; border-radius: 10px;
+    font-size: 14px; color: #333; margin-bottom: 14px;
+    background: #fafafa;
+  }
+  .login-input::placeholder { color: #ccc; }
+
+  .login-btn {
+    width: 100%; max-width: 320px; padding: 15px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    border: none; border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+    color: white; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; margin-top: 8px;
+  }
+
+  .login-divider {
+    display: flex; align-items: center; gap: 16px;
+    width: 100%; max-width: 320px; margin: 20px 0;
+  }
+  .login-divider-line { flex: 1; height: 1px; background: #e8e8e8; }
+  .login-divider-text { font-size: 12px; color: #ccc; }
+
+  .login-social {
+    display: flex; gap: 12px; width: 100%; max-width: 320px;
+  }
+  .login-social-btn {
+    flex: 1; padding: 12px; border: 1.5px solid #e8e8e8; border-radius: 10px;
+    background: white; font-size: 13px; color: #666; font-weight: 500;
+    text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  /* =========== INVITE LANDING MOCK =========== */
+  .invite-mock-container {
+    margin-top: 60px;
+  }
+
+  .invite-screen {
+    background: white; padding: 80px 60px; text-align: center;
+    border-radius: 0 0 16px 16px; min-height: 420px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+
+  .invite-avatar {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, #d4cfc6, #c0b8aa);
+    border: 3px solid var(--gold);
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(193,154,62,0.2);
+  }
+
+  .invite-title {
+    font-family: 'Playfair Display', serif; font-size: 28px; color: #0A0A0A;
+    margin-bottom: 6px;
+  }
+  .invite-brokerage { font-size: 14px; color: #999; margin-bottom: 24px; }
+  .invite-message {
+    font-size: 16px; color: #666; line-height: 1.6;
+    max-width: 380px; margin-bottom: 32px;
+  }
+  .invite-message strong { color: #0A0A0A; }
+
+  .invite-btn {
+    padding: 16px 48px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border: none; border-radius: 12px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700;
+    color: white; letter-spacing: 1px;
+  }
+  .invite-powered {
+    margin-top: 24px; font-size: 11px; color: #ccc; letter-spacing: 1px;
+  }
+  .invite-powered span { color: var(--gold); font-weight: 600; }
+
+  /* =========== NOTES =========== */
+  .cmo-note {
+    background: var(--dark-mid); border: 1px solid var(--dark-border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0; padding: 28px 32px;
+    margin-top: 40px;
+  }
+  .cmo-note-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .cmo-note p { font-size: 14px; line-height: 1.7; color: var(--text-mid); }
+
+  /* =========== FOOTER =========== */
+  .brand-footer {
+    text-align: center; padding: 80px 40px;
+    border-top: 1px solid var(--dark-border);
+  }
+  .brand-footer .logo-refined { margin-bottom: 16px; }
+  .brand-footer .tagline-refined-small { margin-bottom: 20px; }
+  .brand-footer .copy { font-size: 12px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!-- =========== HERO =========== -->
+<div class="hero">
+  <div class="hero-label">Brand Direction &mdash; April 2026</div>
+  <div class="hero-wordmark">
+    <span class="partner">PARTNER</span><span class="pro">PRO</span>
+  </div>
+  <div class="hero-line"></div>
+  <div class="hero-tagline">YOUR LICENSE. YOUR TERRITORY.</div>
+  <div class="hero-year">CONFIDENTIAL &mdash; CMO BRAND DOCUMENT</div>
+</div>
+
+<!-- =========== TAGLINE =========== -->
+<div class="section-divider"></div>
+<div class="section">
+  <div class="section-number">01 &mdash; Tagline</div>
+  <div class="section-title">Words that move<br>an industry.</div>
+  <div class="section-subtitle">The old tagline described a feature. The new one declares a movement. Every agent who reads it immediately understands what changes for them.</div>
+
+  <div class="tagline-display">
+    <div class="tagline-old">Automate Your Real Estate</div>
+    <div class="tagline-arrow">&darr;</div>
+    <div class="tagline-new">Your License.<br><span>Your Territory.</span></div>
+    <div class="tagline-context">Serve every buyer in your state. No boundaries.<br>No referrals. One platform.</div>
+  </div>
+
+  <div class="cmo-note">
+    <div class="cmo-note-label">CMO Direction</div>
+    <p>This tagline scales with the entire vision. It works for PartnerPro today. It works for AYRE tomorrow. It works on a billboard, in an Instagram bio, on a pitch deck, and whispered in a keynote. It doesn't explain the product &mdash; it declares the future of the industry.</p>
+  </div>
+</div>
+
+<!-- =========== LOGO =========== -->
+<div class="section-divider"></div>
+<div class="section">
+  <div class="section-number">02 &mdash; Wordmark</div>
+  <div class="section-title">Same DNA.<br>Elevated execution.</div>
+  <div class="section-subtitle">The border box is gone. The typography is tighter. The gold is a gradient now &mdash; it catches light like real gold. The tagline has weight.</div>
+
+  <div class="compare-grid">
+    <div class="compare-card before">
+      <div class="compare-badge dim">Before</div>
+      <div class="logo-current">
+        <span class="p">PARTNER</span><span class="r">PRO</span>
+      </div>
+      <div class="tagline-current-small">AUTOMATE YOUR REAL ESTATE</div>
+    </div>
+    <div class="compare-card after">
+      <div class="compare-badge gold">After</div>
+      <div class="logo-refined">
+        <span class="p">PARTNER</span><span class="r">PRO</span>
+      </div>
+      <div class="gold-line-thin"></div>
+      <div class="tagline-refined-small">YOUR LICENSE. YOUR TERRITORY.</div>
+    </div>
+  </div>
+
+  <div class="changes-grid">
+    <div class="change-item">
+      <span class="change-icon">&times;</span>
+      <div class="change-label">Border Box</div>
+      <div class="change-desc">Removed. Premium brands don't cage their wordmarks.</div>
+    </div>
+    <div class="change-item">
+      <span class="change-icon">&darr;</span>
+      <div class="change-label">Letter Spacing</div>
+      <div class="change-desc">Tightened. Reads as modern tech, not traditional real estate.</div>
+    </div>
+    <div class="change-item">
+      <span class="change-icon">&#9672;</span>
+      <div class="change-label">Gold Gradient</div>
+      <div class="change-desc">Multi-tone gold. Catches light. Feels dimensional.</div>
+    </div>
+    <div class="change-item">
+      <span class="change-icon">&#8212;</span>
+      <div class="change-label">Accent Line</div>
+      <div class="change-desc">Replaces the box as the visual anchor. Minimal. Intentional.</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== VARIATIONS =========== -->
+<div class="section-divider"></div>
+<div class="section">
+  <div class="section-number">03 &mdash; Variations</div>
+  <div class="section-title">Every background.<br>Still unmistakable.</div>
+  <div class="section-subtitle">The logo must hold its presence on light surfaces, dark interfaces, and everything in between.</div>
+
+  <div class="var-grid">
+    <div class="var-item light">
+      <div class="logo-refined">
+        <span class="p">PARTNER</span><span class="r">PRO</span>
+      </div>
+      <div class="gold-line-thin"></div>
+      <div class="tagline-refined-small">YOUR LICENSE. YOUR TERRITORY.</div>
+      <div class="var-name">Light</div>
+    </div>
+    <div class="var-item dark">
+      <div class="logo-refined">
+        <span class="p">PARTNER</span><span class="r">PRO</span>
+      </div>
+      <div class="gold-line-thin"></div>
+      <div class="tagline-refined-small">YOUR LICENSE. YOUR TERRITORY.</div>
+      <div class="var-name">Dark</div>
+    </div>
+    <div class="var-item gradient">
+      <div class="logo-stacked">
+        <span class="top">PARTNER</span>
+        <span class="bottom">PRO</span>
+      </div>
+      <div class="var-name">Stacked</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== APP ICONS =========== -->
+<div class="section-divider"></div>
+<div class="section">
+  <div class="section-number">04 &mdash; App Icon</div>
+  <div class="section-title">Shelf presence.</div>
+  <div class="section-subtitle">Next to Zillow, Redfin, and Compass on someone's home screen &mdash; this needs to hold its own.</div>
+
+  <div class="icon-row">
+    <div class="icon-item">
+      <div class="icon-circle">PP</div>
+      <div class="icon-label">Circle</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon-rounded">PP</div>
+      <div class="icon-label rec">App Store &#10003;</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon-dark"><span>PP</span></div>
+      <div class="icon-label">Dark</div>
+    </div>
+    <div class="icon-item">
+      <div class="icon-minimal"><span>PP</span></div>
+      <div class="icon-label">Minimal</div>
+    </div>
+  </div>
+
+  <div class="cmo-note">
+    <div class="cmo-note-label">CMO Direction</div>
+    <p>The gold-fill rounded square is the App Store / Google Play icon. Gold gradient gives it physical presence &mdash; it doesn't disappear on a home screen. The circle variant stays for in-app use (chat bubble, avatars). The PP monogram is already strong. Don't overthink it.</p>
+  </div>
+</div>
+
+<!-- =========== IN-APP =========== -->
+<div class="section-divider"></div>
+<div class="section">
+  <div class="section-number">05 &mdash; In-App Application</div>
+  <div class="section-title">The brand lives<br>inside the product.</div>
+  <div class="section-subtitle">Every screen the agent and buyer touch should feel like a $299/month experience.</div>
+
+  <div class="mockup-container">
+    <!-- Desktop -->
+    <div class="browser-mock">
+      <div class="browser-chrome">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">partnerpro.app/agent/dashboard</div>
+      </div>
+      <div class="browser-body">
+        <div class="dash-header">
+          <div class="dash-logo"><span class="p">PARTNER</span><span class="r">PRO</span></div>
+          <div class="dash-nav">
+            <span class="active">Dashboard</span>
+            <span>Search</span>
+            <span>Offers</span>
+            <span>Clients</span>
+            <span>Analytics</span>
+          </div>
+        </div>
+        <div class="dash-content">
+          <div class="dash-greeting">Hello, <span>Himiko Sadiki</span></div>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <div class="dash-stat-num">12</div>
+              <div class="dash-stat-label">Active Clients</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-num">5</div>
+              <div class="dash-stat-label">Pending Offers</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-num">8</div>
+              <div class="dash-stat-label">Showings This Week</div>
+            </div>
+          </div>
+          <div class="dash-activity-label">Recent Activity</div>
+          <div class="dash-activity-row">
+            <div class="left">
+              <div class="avatar"></div>
+              <div><div class="name">Christianna Velazquez</div><div class="detail">2316 Cup Dr, Plano TX</div></div>
+            </div>
+            <div style="text-align:right;"><div class="amount">$539,000</div><div class="status">Pending</div></div>
+          </div>
+          <div class="dash-activity-row">
+            <div class="left">
+              <div class="avatar"></div>
+              <div><div class="name">Marcus Thompson</div><div class="detail">6225 Madrone Ct, Plano TX</div></div>
+            </div>
+            <div style="text-align:right;"><div class="amount">$374,999</div><div class="status">Submitted</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div>
+      <div class="phone-mock">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" style="position:relative;">
+          <div class="phone-header">
+            <div><span class="p">PARTNER</span><span class="r">PRO</span></div>
+            <div class="phone-header-icons">
+              <div class="phone-header-icon"></div>
+              <div class="phone-header-icon"></div>
+            </div>
+          </div>
+          <div class="phone-body">
+            <div class="phone-search">
+              <div class="phone-search-icon"></div>
+              Search city, zip, or address...
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-img">
+                <div class="phone-card-heart">&hearts;</div>
+              </div>
+              <div class="phone-card-info">
+                <div class="phone-card-price">$539,000</div>
+                <div class="phone-card-addr">2316 Cup Dr, Plano, TX 75074</div>
+                <div class="phone-card-specs"><span>3,159 sqft</span><span>4 bed</span><span>3 bath</span></div>
+              </div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-img">
+                <div class="phone-card-heart">&hearts;</div>
+              </div>
+              <div class="phone-card-info">
+                <div class="phone-card-price">$374,999</div>
+                <div class="phone-card-addr">6225 Madrone Ct, Plano, TX</div>
+                <div class="phone-card-specs"><span>1,573 sqft</span><span>3 bed</span><span>3 bath</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-chat-bubble"><span>PP</span></div>
+          <div class="phone-bottom-nav">
+            <div class="phone-nav-item"><div class="phone-nav-dot active"></div><div class="phone-nav-label active">Search</div></div>
+            <div class="phone-nav-item"><div class="phone-nav-dot inactive"></div><div class="phone-nav-label inactive">Saved</div></div>
+            <div class="phone-nav-item"><div class="phone-nav-dot inactive"></div><div class="phone-nav-label inactive">Homes</div></div>
+            <div class="phone-nav-item"><div class="phone-nav-dot inactive"></div><div class="phone-nav-label inactive">Showings</div></div>
+            <div class="phone-nav-item"><div class="phone-nav-dot inactive"></div><div class="phone-nav-label inactive">Tools</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login mockup -->
+  <div class="login-mock-container">
+    <div class="login-browser">
+      <div class="browser-chrome">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">partnerpro.app/login</div>
+      </div>
+      <div class="login-split">
+        <div class="login-image">
+          <div class="big-tagline">Your License.<br><span>Your Territory.</span></div>
+          <div class="login-sub">Serve every buyer in your state.<br>No boundaries. No referrals. One platform.</div>
+        </div>
+        <div class="login-form-side">
+          <div class="login-form-logo"><span class="p">PARTNER</span><span class="r">PRO</span></div>
+          <div class="login-form-title">Welcome Back</div>
+          <div class="login-form-sub">Sign in to your dashboard</div>
+          <div class="login-input" style="color:#999;">agent@email.com</div>
+          <div class="login-input" style="color:#999;">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+          <div class="login-btn">SIGN IN</div>
+          <div class="login-divider">
+            <div class="login-divider-line"></div>
+            <div class="login-divider-text">or</div>
+            <div class="login-divider-line"></div>
+          </div>
+          <div class="login-social">
+            <div class="login-social-btn">G &nbsp; Google</div>
+            <div class="login-social-btn">&apple; &nbsp; Apple</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invite mockup -->
+  <div class="invite-mock-container">
+    <div class="login-browser">
+      <div class="browser-chrome">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">partnerpro.app/invite/himiko-sadiki</div>
+      </div>
+      <div class="invite-screen">
+        <div class="invite-avatar"></div>
+        <div class="invite-title">Himiko Sadiki</div>
+        <div class="invite-brokerage">eXp Realty &mdash; Licensed in California &amp; Texas</div>
+        <div class="invite-message">You've been personally invited to work with <strong>Himiko Sadiki</strong>. Search homes, schedule showings, and submit offers &mdash; all in one place.</div>
+        <div class="invite-btn">GET STARTED</div>
+        <div class="invite-powered">Powered by <span>PARTNERPRO</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cmo-note" style="margin-top:40px;">
+    <div class="cmo-note-label">CMO Direction</div>
+    <p>Three screens that define the brand experience. The login sells the vision before the agent even signs in. The dashboard makes the agent feel in control of their empire. The invite page makes the buyer feel personally welcomed &mdash; not like they downloaded another app. Every pixel is intentional. Every screen justifies $299/month.</p>
+  </div>
+</div>
+
+<!-- =========== FOOTER =========== -->
+<div class="section-divider"></div>
+<div class="brand-footer">
+  <div class="logo-refined">
+    <span class="p">PARTNER</span><span class="r">PRO</span>
+  </div>
+  <div class="gold-line-thin"></div>
+  <div class="tagline-refined-small" style="margin-bottom:24px;">YOUR LICENSE. YOUR TERRITORY.</div>
+  <div class="copy">&copy; 2026 PartnerPro. All rights reserved. Confidential brand document.</div>
+</div>
+
+</body>
+</html>
