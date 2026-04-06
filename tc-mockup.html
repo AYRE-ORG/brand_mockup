@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TC Desk v4 — Definitive Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.5; }
+  :root {
+    --gold: #C19A3E;
+    --gold-subtle: #FDF8EE;
+    --gold-gradient: linear-gradient(135deg, #C19A3E 0%, #E8D4A0 100%);
+    --info: #0EA5E9;
+    --info-subtle: #DBEAFE;
+    --success: #10B981;
+    --success-subtle: #ECFDF5;
+    --danger: #EF4444;
+    --danger-subtle: #FEE2E2;
+    --warning: #F59E0B;
+    --warning-subtle: #FEF3C7;
+    --purple: #8B5CF6;
+    --purple-subtle: #EDE9FE;
+    --bg: #FAFAFA;
+    --bg-secondary: #fff;
+    --border: #E5E7EB;
+    --border-light: #F3F4F6;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --radius: 8px;
+    --radius-sm: 6px;
+  }
+
+  .banner-top { background: var(--gold-gradient); color: #fff; text-align: center; padding: 6px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+
+  .topbar { display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; }
+  .brand { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; color: var(--text-primary); }
+  .brand span { color: var(--gold); }
+  .divider { width: 1px; height: 20px; background: var(--border); }
+  .label { font-size: 10px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .tabs { display: flex; gap: 2px; }
+  .tab { padding: 8px 12px; font-size: 11px; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-radius: 6px; transition: 0.15s; white-space: nowrap; }
+  .tab:hover { background: var(--border-light); color: var(--text-primary); }
+  .tab.active { background: var(--gold); color: #fff; }
+
+  .mockup { display: none; height: calc(100vh - 70px); overflow: hidden; }
+  .mockup.active { display: flex; }
+
+  .sidebar { width: 220px; background: var(--bg-secondary); border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
+  .sidebar-logo { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .sidebar-logo h2 { font-size: 14px; font-weight: 800; }
+  .sidebar-logo h2 span { color: var(--gold); }
+  .sidebar-logo .sub { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+  .nav-sec { font-size: 9px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 20px 6px; }
+  .nav-item { padding: 9px 20px; font-size: 11px; color: var(--text-secondary); cursor: pointer; transition: 0.1s; display: flex; align-items: center; gap: 8px; }
+  .nav-item:hover { background: var(--border-light); }
+  .nav-item.active { background: var(--gold-subtle); color: var(--gold); font-weight: 600; }
+  .nav-item .icon { font-size: 14px; }
+  .nav-item .badge { font-size: 9px; font-weight: 700; background: var(--info); color: #fff; padding: 2px 6px; border-radius: 12px; margin-left: auto; }
+  .nav-item .badge.gold { background: var(--gold); }
+  .sidebar-footer { margin-top: auto; padding: 12px 20px; border-top: 1px solid var(--border); }
+  .user { display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .user .name { font-size: 11px; font-weight: 600; }
+  .user .role { font-size: 9px; color: var(--text-muted); }
+
+  .main { flex: 1; overflow-y: auto; background: var(--bg); }
+  .fbo { background: var(--gold-subtle); border-bottom: 1px solid var(--border); padding: 12px 20px; }
+  .fbo .tag { font-size: 9px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .fbo h2 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .fbo p { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+  .page-hdr { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 20px; border-bottom: 1px solid var(--border); gap: 12px; }
+  .page-hdr h1 { font-size: 24px; font-weight: 700; }
+  .page-hdr .sub { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .hdr-actions { display: flex; gap: 8px; align-items: center; }
+  .search-bar { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+  .search-bar input { flex: 1; border: 0; outline: 0; font-size: 11px; }
+  .search-bar .sc { font-size: 9px; color: var(--text-muted); }
+
+  .btn { padding: 8px 14px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: 0.15s; font-family: 'Inter', sans-serif; }
+  .btn-gold { background: var(--gold); color: #fff; }
+  .btn-gold:hover { opacity: 0.9; }
+  .btn-outline { background: transparent; border-color: var(--border); color: var(--text-secondary); }
+  .btn-outline:hover { background: var(--border-light); }
+
+  .stats { display: grid; gap: 12px; padding: 16px 20px; }
+  .stats-4 { grid-template-columns: repeat(4, 1fr); }
+  .stats-5 { grid-template-columns: repeat(5, 1fr); }
+  .stat { background: #fff; padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); }
+  .sl { font-size: 10px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
+  .sv { font-size: 24px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+  .sc { font-size: 10px; color: var(--text-muted); }
+  .sc.up { color: var(--success); font-weight: 600; }
+
+  .filter-bar { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--border); }
+  .filter-chip { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: #fff; border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: 500; }
+  .filter-chip.active { border-color: var(--gold); background: var(--gold-subtle); color: var(--gold); }
+  .chip-av { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+
+  .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 20px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .card-hdr { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .card-hdr h3 { font-size: 13px; font-weight: 700; }
+  .card-hdr .cnt { font-size: 10px; color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
+  .hdr-actions select { padding: 4px 8px; font-size: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff; cursor: pointer; }
+
+  .role-select { padding: 4px 8px; font-size: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff; cursor: pointer; }
+
+  .tbl { width: 100%; border-collapse: collapse; }
+  .tbl thead { background: var(--border-light); }
+  .tbl th { padding: 10px 12px; text-align: left; font-size: 10px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.3px; }
+  .tbl td { padding: 10px 12px; font-size: 11px; border-bottom: 1px solid var(--border-light); }
+  .tbl tr:hover { background: var(--bg); }
+
+  .pill { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-block; white-space: nowrap; }
+  .pill-green { background: var(--success-subtle); color: var(--success); }
+  .pill-blue { background: var(--info-subtle); color: var(--info); }
+  .pill-yellow { background: var(--warning-subtle); color: var(--warning); }
+  .pill-gold { background: var(--gold-subtle); color: var(--gold); }
+  .pill-gray { background: var(--border-light); color: var(--text-secondary); }
+  .pill-purple { background: var(--purple-subtle); color: var(--purple); }
+
+  .av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .av-sm { width: 28px; height: 28px; font-size: 10px; }
+
+  .hbar { height: 4px; border-radius: 2px; background: var(--border-light); display: inline-flex; }
+  .hbar.hg { width: 80px; background: linear-gradient(to right, var(--success) 70%, var(--border) 70%); }
+  .hbar.hy { width: 80px; background: linear-gradient(to right, var(--warning) 50%, var(--border) 50%); }
+
+  .badge-incomplete { font-size: 9px; color: var(--warning); font-weight: 600; padding: 3px 6px; background: var(--warning-subtle); border-radius: 4px; display: inline-block; }
+
+  .workspace-toggle { display: flex; gap: 8px; padding: 12px 20px; border-bottom: 1px solid var(--border); }
+  .ws-btn { padding: 6px 12px; font-size: 11px; font-weight: 600; color: var(--text-secondary); background: transparent; border: 1px solid transparent; border-radius: 6px; cursor: pointer; transition: 0.1s; }
+  .ws-btn.active { background: var(--gold); color: #fff; }
+
+  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 16px 20px; overflow-x: auto; }
+  .kcol { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+  .kcol-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .kcol-title { font-size: 11px; font-weight: 700; }
+  .kcol-cnt { font-size: 10px; font-weight: 600; color: var(--text-secondary); }
+  .kcard { background: var(--bg); padding: 10px; border-radius: var(--radius-sm); margin-bottom: 8px; cursor: pointer; transition: 0.15s; }
+  .kcard:hover { box-shadow: var(--shadow-md); }
+  .kt { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+  .ka { font-size: 9px; color: var(--text-secondary); margin-bottom: 6px; }
+  .kf { display: flex; gap: 6px; }
+  .kd { font-size: 9px; color: var(--text-muted); }
+  .kd.urgent { color: var(--danger); font-weight: 600; }
+
+  .folder-tree { padding: 12px; }
+  .folder { margin-bottom: 8px; }
+  .folder-header { display: flex; align-items: center; gap: 6px; padding: 8px 10px; cursor: pointer; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600; transition: 0.1s; }
+  .folder-header:hover { background: var(--border-light); }
+  .folder-header.active { background: var(--gold-subtle); color: var(--gold); }
+  .folder-icon { font-size: 14px; }
+  .folder-count { margin-left: auto; font-size: 9px; background: var(--border-light); color: var(--text-secondary); padding: 2px 6px; border-radius: 4px; }
+  .subfolder { padding-left: 24px; margin-top: 4px; }
+  .file-row { padding: 6px 0; font-size: 10px; color: var(--text-secondary); }
+
+  .detail-left { width: 300px; background: #fff; border-right: 1px solid var(--border); overflow-y: auto; }
+  .detail-right { overflow-y: auto; }
+  .detail-topbar { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .back { font-size: 11px; font-weight: 600; color: var(--gold); cursor: pointer; }
+  .detail-addr { padding: 16px; border-bottom: 1px solid var(--border); }
+  .detail-addr h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .asub { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
+  .detail-addr .hstrip { height: 4px; border-radius: 2px; margin-top: 8px; background: linear-gradient(to right, var(--success) 0% 65%, var(--warning) 65% 80%, var(--border) 80% 100%); }
+  .fsec { border-bottom: 1px solid var(--border-light); }
+  .fsec-hdr { padding: 8px 16px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); background: var(--gold-subtle); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .frow { display: flex; justify-content: space-between; align-items: center; padding: 7px 16px; font-size: 11px; border-bottom: 1px solid var(--border-light); }
+  .frow:last-child { border-bottom: none; }
+  .fl { color: var(--text-secondary); font-weight: 500; }
+  .fv { font-weight: 600; color: var(--text-primary); text-align: right; }
+
+  .dtabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); background: #fff; overflow-x: auto; padding: 0 16px; }
+  .dtab { padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: 0.15s; }
+  .dtab:hover { color: var(--text-primary); }
+  .dtab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .dtab .tb { font-size: 9px; background: var(--gold-subtle); color: var(--gold); padding: 1px 5px; border-radius: 8px; margin-left: 3px; font-weight: 700; }
+
+  .task-list { padding: 10px 16px; }
+  .task-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+  .task-chk { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; font-size: 9px; }
+  .task-chk.done { background: var(--success); border-color: var(--success); color: #fff; }
+  .task-nm { font-size: 12px; font-weight: 500; flex: 1; }
+  .task-nm.completed { text-decoration: line-through; color: var(--text-muted); }
+  .task-due { font-size: 10px; color: var(--text-secondary); }
+  .task-due.overdue { color: var(--danger); font-weight: 600; }
+
+  .offer-src { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 4px; display: inline-block; }
+  .src-pp { background: var(--gold-subtle); color: var(--gold); }
+  .src-man { background: var(--border-light); color: var(--text-secondary); }
+  .src-auto { background: #EDE9FE; color: var(--purple); }
+  .offer-btn { padding: 4px 10px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 600; cursor: pointer; border: 1px solid var(--gold); background: 0 0; color: var(--gold); transition: 0.15s; font-family: 'Inter', sans-serif; }
+  .offer-btn:hover { background: var(--gold-gradient); color: #fff; }
+
+  .notif { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: 0.1s; align-items: flex-start; }
+  .notif:hover { background: var(--gold-subtle); }
+  .notif.unread { background: rgba(193, 154, 62, 0.04); border-left: 3px solid var(--gold); }
+  .notif-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .notif-body { flex: 1; min-width: 0; }
+  .notif-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .notif-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+  .notif-meta { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+  .notif-time { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+  .notif-channel { font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 4px; }
+  .ch-sms { background: #ECFDF5; color: var(--success); }
+  .ch-email { background: #DBEAFE; color: var(--info); }
+  .ch-push { background: #EDE9FE; color: var(--purple); }
+  .ch-system { background: var(--border-light); color: var(--text-secondary); }
+
+  .msg-row { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
+  .msg-dir { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+  .msg-out { background: var(--gold-subtle); color: var(--gold); }
+  .msg-in { background: #DBEAFE; color: var(--info); }
+  .template-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; cursor: pointer; transition: 0.15s; }
+  .template-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
+  .template-card.selected { border-color: var(--gold); background: var(--gold-subtle); }
+
+  .env-row { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border-light); align-items: center; }
+  .env-status { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .env-sent { background: var(--info); }
+  .env-signed { background: var(--success); }
+  .env-pending { background: var(--warning); }
+  .env-voided { background: var(--text-muted); }
+  .ds-badge { background: #4C3FBF; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.3px; }
+
+  .state-badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: var(--border-light); color: var(--text-secondary); display: inline-block; }
+  .state-ca { background: #FDF8EE; color: var(--gold); }
+  .state-tx { background: #DBEAFE; color: var(--info); }
+  .state-nj { background: #EDE9FE; color: var(--purple); }
+  .state-ny { background: #F0F9FF; color: #1D4ED8; }
+  .state-fl { background: #FEF3C7; color: #D97706; }
+  .state-il { background: #FCE7F3; color: #BE185D; }
+
+  .bd-status-green { background: #ECFDF5; color: var(--success); }
+  .bd-status-yellow { background: #FEF3C7; color: #D97706; }
+
+  .broker-defaults { background: var(--gold-subtle); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 12px; }
+  .broker-defaults-title { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
+  .broker-defaults-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 11px; }
+  .broker-defaults-label { color: var(--text-secondary); font-weight: 500; }
+  .broker-defaults-value { font-weight: 600; color: var(--text-primary); }
+
+  .form-section { margin-bottom: 24px; }
+  .form-section-title { display: flex; align-items: center; gap: 8px; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 2px solid var(--border); font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .form-section-badge { font-size: 10px; font-weight: 600; color: var(--text-secondary); margin-left: auto; }
+  .form-group { margin-bottom: 12px; }
+  .form-label { display: block; font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+  .form-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 11px; font-family: 'Inter', sans-serif; }
+  .form-input:focus { outline: 0; border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-subtle); }
+  .form-input:disabled { background: var(--border-light); color: var(--text-muted); cursor: not-allowed; }
+  .form-hint { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+
+  .settings-tabs { display: flex; gap: 2px; padding: 12px 20px; border-bottom: 1px solid var(--border); background: #fff; }
+  .st-tab { padding: 8px 14px; font-size: 11px; font-weight: 600; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: 0.15s; white-space: nowrap; }
+  .st-tab:hover { color: var(--text-primary); }
+  .st-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner-top">✦ First. Best. Only. ✦</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand">TC <span>Desk</span></div>
+  <div class="divider"></div>
+  <div class="label">Screens:</div>
+  <div class="tabs">
+    <div class="tab active" onclick="show('director')">Director Overview</div>
+    <div class="tab" onclick="show('workspace')">TC Workspace</div>
+    <div class="tab" onclick="show('agents')">Agent Roster</div>
+    <div class="tab" onclick="show('intake')">Agent Intake</div>
+    <div class="tab" onclick="show('detail')">Transaction Detail</div>
+    <div class="tab" onclick="show('pipeline')">Task Pipeline</div>
+    <div class="tab" onclick="show('docs')">Document Explorer</div>
+    <div class="tab" onclick="show('offers')">Offers Hub</div>
+    <div class="tab" onclick="show('notifications')">Notifications</div>
+    <div class="tab" onclick="show('comms')">Comms Hub</div>
+    <div class="tab" onclick="show('signing')">DocuSign</div>
+    <div class="tab" onclick="show('settings')">Settings</div>
+    <div class="tab" onclick="show('billing')">Subscription</div>
+  </div>
+</div>
+
+<!-- SCREEN 1: DIRECTOR OVERVIEW -->
+<div class="mockup active" id="s-director">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Director View</div></div>
+  <div class="nav-sec">Overview</div>
+  <div class="nav-item active"><span class="icon">📊</span> Director Dashboard</div>
+  <div class="nav-item"><span class="icon">👤</span> TC Workspaces</div>
+  <div class="nav-item"><span class="icon">🏠</span> All Transactions <span class="badge">27</span></div>
+  <div class="nav-item"><span class="icon">📄</span> All Offers <span class="badge gold">5</span></div>
+  <div class="nav-sec">People</div>
+  <div class="nav-item"><span class="icon">🤝</span> Agent Roster</div>
+  <div class="nav-item"><span class="icon">👥</span> All Contacts</div>
+  <div class="nav-sec">Manage</div>
+  <div class="nav-item"><span class="icon">📋</span> Task Pipeline</div>
+  <div class="nav-item"><span class="icon">📁</span> Documents</div>
+  <div class="nav-item"><span class="icon">📧</span> Email Center</div>
+  <div class="nav-item"><span class="icon">⚡</span> Triggers</div>
+  <div class="nav-item"><span class="icon">📅</span> Calendar</div>
+  <div class="nav-sec">System</div>
+  <div class="nav-item"><span class="icon">📐</span> Templates</div>
+  <div class="nav-item"><span class="icon">📈</span> Reports</div>
+  <div class="nav-item"><span class="icon">⚙️</span> Settings</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo">
+    <div class="tag">✦ Director View — Master Control</div>
+    <h2>Organization-Wide Command Center</h2>
+    <p>Christianna sees ALL TCs, ALL agents, ALL transactions. Filter by TC, by agent, or view everything at once. This is what scaling looks like.</p>
+  </div>
+
+  <div class="page-hdr">
+    <div><h1>Director Dashboard</h1><div class="sub">Saturday, April 4, 2026 — Organization overview across all TCs and agents</div></div>
+    <div class="hdr-actions">
+      <div class="search-bar"><span>🔍</span><input type="text" placeholder="Search everything..."><span class="sc">⌘K</span></div>
+      <button class="btn btn-gold">+ New TC Workspace</button>
+    </div>
+  </div>
+
+  <div class="stats stats-5">
+    <div class="stat"><div class="sl">Active Transactions</div><div class="sv">27</div><div class="sc up">+3 this week</div></div>
+    <div class="stat"><div class="sl">Offers Pending</div><div class="sv">5</div><div class="sc up">+1 today</div></div>
+    <div class="stat"><div class="sl">Agents Active</div><div class="sv">12</div><div class="sc">Across multiple states</div></div>
+    <div class="stat"><div class="sl">States Active</div><div class="sv">6</div><div class="sc">CA, TX, NJ, NY, FL, IL</div></div>
+    <div class="stat"><div class="sl">Monthly Revenue</div><div class="sv">$24.5K</div><div class="sc up">+18% MoM</div></div>
+  </div>
+
+  <div class="filter-bar">
+    <span style="font-size:11px;font-weight:600;color:var(--text-secondary)">Filter by TC:</span>
+    <div class="filter-chip active"><div class="chip-av" style="background:var(--gold)">CV</div>Christianna V. (All)</div>
+    <div class="filter-chip"><div class="chip-av" style="background:var(--info)">FA</div>Fred A.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><h3>📊 All Transactions <span class="cnt">27 total</span></h3><div class="hdr-actions"><select class="role-select"><option>All States</option><option>CA</option><option>TX</option><option>NJ</option><option>NY</option><option>FL</option><option>IL</option></select><select class="role-select"><option>All TCs</option><option>Christianna</option><option>Fred</option></select></div></div>
+    <table class="tbl">
+      <thead><tr><th>Property</th><th>State</th><th>Type</th><th>Agent</th><th>TC</th><th>Status</th><th>Health</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600">1428 Elm Street</td><td><span class="state-badge state-ca">CA</span></td><td>Buyer</td><td>Himiko Sadiki</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--gold)">CV</div>Christianna</div></td><td><span class="pill pill-blue">Pending Inspection</span></td><td><div class="hbar hg"></div></td></tr>
+        <tr><td style="font-weight:600">550 Pine Drive</td><td><span class="state-badge state-ca">CA</span></td><td>Seller</td><td>Joanne Smith</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--gold)">CV</div>Christianna</div></td><td><span class="pill pill-green">Close Ready</span></td><td><div class="hbar hg"></div></td></tr>
+        <tr><td style="font-weight:600">2200 Oak Avenue</td><td><span class="state-badge state-ca">CA</span></td><td>Buyer</td><td>Himiko Sadiki</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--gold)">CV</div>Christianna</div></td><td><span class="pill pill-yellow">Reviewing Offer</span></td><td><div class="hbar hy"></div></td></tr>
+        <tr><td style="font-weight:600">8847 Market Street</td><td><span class="state-badge state-tx">TX</span></td><td>Seller</td><td>Marcus Johnson</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--info)">FA</div>Fred</div></td><td><span class="pill pill-blue">Pending Inspection</span></td><td><div class="hbar hy"></div></td></tr>
+        <tr><td style="font-weight:600">120 Brook Lane</td><td><span class="state-badge state-nj">NJ</span></td><td>Buyer</td><td>Sarah Chen</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--info)">FA</div>Fred</div></td><td><span class="pill pill-green">Close Ready</span></td><td><div class="hbar hg"></div></td></tr>
+        <tr><td style="font-weight:600">445 Park Avenue</td><td><span class="state-badge state-ny">NY</span></td><td>Buyer</td><td>Rachel Torres</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--gold)">CV</div>Christianna</div></td><td><span class="pill pill-blue">Attorney Review</span></td><td><div class="hbar hy"></div></td></tr>
+        <tr><td style="font-weight:600">1200 Brickell Ave</td><td><span class="state-badge state-fl">FL</span></td><td>Buyer</td><td>Damien Brooks</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--info)">FA</div>Fred</div></td><td><span class="pill pill-yellow">Pending Appraisal</span></td><td><div class="hbar hy"></div></td></tr>
+        <tr><td style="font-weight:600">880 N Michigan Ave</td><td><span class="state-badge state-il">IL</span></td><td>Seller</td><td>Kenji Watanabe</td><td><div style="display:flex;align-items:center;gap:4px"><div class="av av-sm" style="background:var(--gold)">CV</div>Christianna</div></td><td><span class="pill pill-green">Active</span></td><td><div class="hbar hg"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 2: TC WORKSPACE -->
+<div class="mockup" id="s-workspace">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">TC Workspace</div></div>
+  <div class="nav-sec">Transactions</div>
+  <div class="nav-item active"><span class="icon">📊</span> Dashboard</div>
+  <div class="nav-item"><span class="icon">🏠</span> My Transactions <span class="badge">14</span></div>
+  <div class="nav-item"><span class="icon">📄</span> Pending Offers <span class="badge">3</span></div>
+  <div class="nav-sec">Agents</div>
+  <div class="nav-item"><span class="icon">🤝</span> My Agents <span class="badge">6</span></div>
+  <div class="nav-item"><span class="icon">👥</span> Contacts</div>
+  <div class="nav-sec">Tools</div>
+  <div class="nav-item"><span class="icon">📋</span> Task Pipeline</div>
+  <div class="nav-item"><span class="icon">📁</span> Documents</div>
+  <div class="nav-item"><span class="icon">📧</span> Email Center</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo">
+    <div class="tag">✦ Your Transaction Workspace</div>
+    <h2>Manage All Your Transactions & Agents</h2>
+    <p>This is your dashboard. 14 active transactions, 6 agents under your supervision. Full task control, document management, and offer pipeline from here.</p>
+  </div>
+
+  <div class="page-hdr">
+    <div><h1>TC Dashboard</h1><div class="sub">Saturday, April 4, 2026 — Your workspace</div></div>
+    <div class="hdr-actions">
+      <button class="btn btn-gold">+ New Transaction</button>
+    </div>
+  </div>
+
+  <div class="stats stats-4">
+    <div class="stat"><div class="sl">Active Transactions</div><div class="sv">14</div><div class="sc">Your agents</div></div>
+    <div class="stat"><div class="sl">Pending Actions</div><div class="sv">8</div><div class="sc">Your tasks</div></div>
+    <div class="stat"><div class="sl">Pending Offers</div><div class="sv">3</div><div class="sc">Awaiting review</div></div>
+    <div class="stat"><div class="sl">My Agents</div><div class="sv">6</div><div class="sc">Active</div></div>
+  </div>
+
+  <div class="workspace-toggle">
+    <button class="ws-btn active">Dashboard</button>
+    <button class="ws-btn">Transactions</button>
+    <button class="ws-btn">Agents</button>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px 16px 20px">
+    <div class="card">
+      <div class="card-hdr"><h3>📊 This Week</h3></div>
+      <div style="padding:16px">
+        <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;color:var(--text-secondary)">Offers Submitted</span><span style="font-weight:700">5</span></div><div style="height:4px;border-radius:2px;background:var(--border-light)"><div style="height:100%;width:80%;border-radius:2px;background:var(--gold)"></div></div></div>
+        <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;color:var(--text-secondary)">Offers Accepted</span><span style="font-weight:700">2</span></div><div style="height:4px;border-radius:2px;background:var(--border-light)"><div style="height:100%;width:40%;border-radius:2px;background:var(--success)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;color:var(--text-secondary)">Documents Signed</span><span style="font-weight:700">12</span></div><div style="height:4px;border-radius:2px;background:var(--border-light)"><div style="height:100%;width:92%;border-radius:2px;background:var(--info)"></div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h3>🎯 My Agents</h3></div>
+      <div style="padding:12px 16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div style="display:flex;align-items:center;gap:8px"><div class="av av-sm" style="background:var(--gold)">HS</div><div><div style="font-size:11px;font-weight:700">Himiko Sadiki</div><div style="font-size:9px;color:var(--text-muted)">7 active</div></div></div><span class="pill pill-green" style="font-size:9px">Online</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div style="display:flex;align-items:center;gap:8px"><div class="av av-sm" style="background:var(--info)">JS</div><div><div style="font-size:11px;font-weight:700">Joanne Smith</div><div style="font-size:9px;color:var(--text-muted)">5 active</div></div></div><span class="pill pill-green" style="font-size:9px">Online</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0"><div style="display:flex;align-items:center;gap:8px"><div class="av av-sm" style="background:var(--purple)">MJ</div><div><div style="font-size:11px;font-weight:700">Marcus Johnson</div><div style="font-size:9px;color:var(--text-muted)">2 active</div></div></div><span class="pill pill-gray" style="font-size:9px">Away</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 3: AGENT ROSTER -->
+<div class="mockup" id="s-agents">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Agent Roster</div></div>
+  <div class="nav-sec">Manage</div>
+  <div class="nav-item active"><span class="icon">🤝</span> All Agents</div>
+  <div class="nav-item"><span class="icon">➕</span> Onboard New</div>
+  <div class="nav-item"><span class="icon">⚙️</span> Settings</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo">
+    <div class="tag">✦ Agent Management</div>
+    <h2>Manage Your Agent Network</h2>
+    <p>12 agents active across multiple states. Onboard new, manage profiles, monitor compliance. Auto-send agent broker demands on escrow opening. Architected for all 50 states.</p>
+  </div>
+
+  <div class="page-hdr">
+    <div><h1>Agent Roster</h1><div class="sub">Saturday, April 4, 2026 — 12 agents active</div></div>
+    <div class="hdr-actions">
+      <button class="btn btn-gold">+ Onboard Agent</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>Name</th><th>License</th><th>State</th><th>MLS</th><th>Status</th><th>Profile</th><th>Demand Status</th><th>Active Trans</th></tr></thead>
+      <tbody>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:var(--gold)">HS</div><div><div style="font-weight:600">Himiko Sadiki</div><div style="font-size:10px;color:var(--text-muted)">PP-001</div></div></div></td><td style="font-size:11px">RE #2156789</td><td><span class="state-badge state-ca">CA</span></td><td>NCCRMLS</td><td><span class="pill pill-green">Active</span></td><td><span class="pill pill-green">Complete</span></td><td><span class="pill bd-status-green">Template Set</span></td><td style="font-weight:700">7</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:var(--info)">JS</div><div><div style="font-weight:600">Joanne Smith</div><div style="font-size:10px;color:var(--text-muted)">PP-002</div></div></div></td><td style="font-size:11px">RE #2146789</td><td><span class="state-badge state-ca">CA</span></td><td>NCCRMLS</td><td><span class="pill pill-green">Active</span></td><td><span class="pill pill-green">Complete</span></td><td><span class="pill bd-status-green">Template Set</span></td><td style="font-weight:700">5</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:var(--purple)">MJ</div><div><div style="font-weight:600">Marcus Johnson</div><div style="font-size:10px;color:var(--text-muted)">PP-003</div></div></div></td><td style="font-size:11px">RE #2136789</td><td><span class="state-badge state-tx">TX</span></td><td>TMLS</td><td><span class="pill pill-green">Active</span></td><td><span class="badge-incomplete">⚠ Incomplete</span></td><td><span class="pill pill-yellow">No Template</span></td><td style="font-weight:700">2</td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:#14B8A6">SC</div><div><div style="font-weight:600">Sarah Chen</div><div style="font-size:10px;color:var(--text-muted)">PP-004</div></div></div></td><td style="font-size:11px">RE #2126789</td><td><span class="state-badge state-nj">NJ</span></td><td>NJMLS</td><td><span class="pill pill-green">Active</span></td><td><span class="pill pill-green">Complete</span></td><td><span class="pill bd-status-green">Template Set</span></td><td style="font-weight:700">3</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 4: AGENT INTAKE FORM -->
+<div class="mockup" id="s-intake">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Agent Intake</div></div>
+  <div class="nav-sec">Actions</div>
+  <div class="nav-item active"><span class="icon">📝</span> Intake Form</div>
+  <div class="nav-item"><span class="icon">✓</span> Review & Assign</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo">
+    <div class="tag">✦ Agent Onboarding</div>
+    <h2>Agent Intake Form</h2>
+    <p>40+ fields organized in sections. REQUIRED fields are mandatory. RECOMMENDED fields avoid "Incomplete Profile" badge. Broker Demand Defaults auto-fills from brokerage info.</p>
+  </div>
+
+  <div class="page-hdr">
+    <div><h1>New Agent Intake</h1><div class="sub">First-time agent setup</div></div>
+    <div class="hdr-actions">
+      <button class="btn btn-outline">Save Draft</button>
+      <button class="btn btn-gold">Save & Assign to TC</button>
+    </div>
+  </div>
+
+  <div style="max-width:800px;margin:0 auto;padding:0 20px 20px 20px">
+    <!-- REQUIRED FIELDS -->
+    <div class="form-section">
+      <div class="form-section-title">
+        <span style="background:var(--danger);color:#fff;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">*</span>
+        REQUIRED
+        <span class="form-section-badge">4 fields</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">First Name *</label>
+          <input type="text" class="form-input" value="Himiko" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name *</label>
+          <input type="text" class="form-input" value="Sadiki" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" class="form-input" value="himiko@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone *</label>
+          <input type="tel" class="form-input" value="(415) 555-0147" />
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDED FIELDS -->
+    <div class="form-section">
+      <div class="form-section-title">
+        <span style="background:var(--warning);color:#fff;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">!</span>
+        RECOMMENDED
+        <span class="form-section-badge">Avoid "Incomplete Profile" badge</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">License Number</label>
+          <input type="text" class="form-input" value="RE #2156789" />
+          <div class="form-hint">Real estate license</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">License State</label>
+          <select class="form-input">
+            <option selected>CA</option>
+            <option>TX</option>
+            <option>NJ</option>
+            <option>NY</option>
+            <option>FL</option>
+            <option>IL</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">License Expiration</label>
+          <input type="date" class="form-input" value="2026-12-31" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Brokerage Name</label>
+          <input type="text" class="form-input" value="Century 21 Bay Area" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Brokerage Address</label>
+          <input type="text" class="form-input" value="1234 Market St, San Francisco, CA" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">MLS ID</label>
+          <input type="text" class="form-input" value="NCCRMLS123456" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">MLS Association</label>
+          <input type="text" class="form-input" value="NCCRMLS" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Broker of Record Name</label>
+          <input type="text" class="form-input" value="John Martinez" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Broker of Record Email</label>
+          <input type="email" class="form-input" value="john.martinez@c21.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Broker of Record Phone</label>
+          <input type="tel" class="form-input" value="(415) 555-0199" />
+        </div>
+      </div>
+    </div>
+
+    <!-- BROKER DEMAND DEFAULTS -->
+    <div class="form-section">
+      <div class="form-section-title">
+        💰 BROKER DEMAND DEFAULTS
+        <span class="form-section-badge">Auto-send on escrow opening</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">Default Commission Rate %</label>
+          <input type="text" class="form-input" value="3%" placeholder="e.g., 3%, 2.5%, 2%" />
+          <div class="form-hint">Commission rate for broker demand</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Broker Demand Template</label>
+          <select class="form-input">
+            <option selected>Standard CA</option>
+            <option>Custom CA</option>
+            <option>Standard TX</option>
+            <option>Standard NJ</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Commission Notes</label>
+          <input type="text" class="form-input" placeholder="Optional notes for broker demand" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Delivery Preference</label>
+          <select class="form-input">
+            <option selected>Auto-send with AYRE invoice</option>
+            <option>TC sends manually</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPTIONAL FIELDS -->
+    <div class="form-section">
+      <div class="form-section-title">
+        OPTIONAL
+        <span class="form-section-badge">Flexible — Fill at your pace</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">Broker Number</label>
+          <input type="text" class="form-input" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Brokerage Phone</label>
+          <input type="tel" class="form-input" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">NRDS ID</label>
+          <input type="text" class="form-input" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Team Name</label>
+          <input type="text" class="form-input" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specialization</label>
+          <input type="text" class="form-input" placeholder="e.g., Luxury, First-Time Buyers" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Areas</label>
+          <input type="text" class="form-input" placeholder="e.g., Bay Area, Silicon Valley" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Years of Experience</label>
+          <input type="number" class="form-input" value="21" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Title Company</label>
+          <input type="text" class="form-input" placeholder="Optional" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Website URL</label>
+          <input type="url" class="form-input" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Timezone</label>
+          <select class="form-input">
+            <option selected>America/Los_Angeles</option>
+            <option>America/Chicago</option>
+            <option>America/New_York</option>
+            <option>America/Denver</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Bio / About</label>
+        <textarea class="form-input" rows="3" placeholder="Tell agents about yourself..."></textarea>
+      </div>
+    </div>
+
+    <!-- AUTO-GENERATED -->
+    <div class="form-section">
+      <div class="form-section-title">
+        AUTO-GENERATED
+        <span class="form-section-badge">System-filled</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="form-label">Source Platform</label>
+          <input type="text" class="form-input" value="PartnerPro" disabled />
+          <div class="form-hint">Where they onboarded from</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Agent ID</label>
+          <input type="text" class="form-input" value="PP-001" disabled />
+          <div class="form-hint">Unique identifier</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assigned TC</label>
+          <input type="text" class="form-input" value="Christianna Velasquez" disabled />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Onboard Date</label>
+          <input type="text" class="form-input" value="2026-04-04" disabled />
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-outline">Cancel</button>
+      <button class="btn btn-gold">Save & Assign to TC</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 5: TRANSACTION DETAIL -->
+<div class="mockup" id="s-detail">
+<div style="display:flex;height:100%;width:100%">
+  <div class="detail-left">
+    <div class="detail-topbar"><div class="back">← Back</div></div>
+    <div class="detail-addr">
+      <h2>1428 Elm Street</h2>
+      <div class="asub">San Francisco, CA 94103</div>
+      <div class="hstrip"></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr">Transaction Info</div>
+      <div class="frow"><div class="fl">Type</div><div class="fv">Buyer Representation</div></div>
+      <div class="frow"><div class="fl">Agent</div><div class="fv">Himiko Sadiki</div></div>
+      <div class="frow"><div class="fl">Status</div><div class="fv"><span class="pill pill-blue">Pending Inspection</span></div></div>
+      <div class="frow"><div class="fl">Offer Price</div><div class="fv">$1,250,000</div></div>
+      <div class="frow"><div class="fl">Original Price</div><div class="fv">$1,295,000</div></div>
+      <div class="frow"><div class="fl">Days on Market</div><div class="fv">23</div></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr">Important Dates</div>
+      <div class="frow"><div class="fl">Offer Date</div><div class="fv">Mar 25, 2026</div></div>
+      <div class="frow"><div class="fl">Offer Expires</div><div class="fv">Apr 8, 2026</div></div>
+      <div class="frow"><div class="fl">Inspection Due</div><div class="fv">Apr 2, 2026</div></div>
+      <div class="frow"><div class="fl">Close Date</div><div class="fv">May 9, 2026</div></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr">Parties</div>
+      <div class="frow"><div class="fl">Buyer</div><div class="fv">Jennifer Mills</div></div>
+      <div class="frow"><div class="fl">Seller</div><div class="fv">Robert & Mary Chen</div></div>
+      <div class="frow"><div class="fl">List Agent</div><div class="fv">David Wong</div></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr">Escrow & Title</div>
+      <div class="frow"><div class="fl">Escrow Officer</div><div class="fv">Maria Gonzalez</div></div>
+      <div class="frow"><div class="fl">Title Company</div><div class="fv">First American</div></div>
+      <div class="frow"><div class="fl">Escrow #</div><div class="fv">FA-2026-012345</div></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr" style="background:var(--gold-subtle);color:var(--gold)">AYRE TC Fee Invoice</div>
+      <div class="frow"><div class="fl">Service Fee</div><div class="fv" style="color:var(--gold);font-weight:700">$450</div></div>
+      <div class="frow"><div class="fl">Status</div><div class="fv"><span class="pill bd-status-green">Sent Apr 4</span></div></div>
+      <div class="frow"><div class="fl">Invoice</div><div class="fv">AYRE-2026-0089</div></div>
+      <div style="padding:7px 16px;border-top:1px solid var(--border-light)"><button class="offer-btn" style="width:100%;text-align:center">View Invoice</button></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-hdr" style="background:#FEF3C7;color:#D97706">AGENT BROKER DEMAND</div>
+      <div class="frow"><div class="fl">Agent</div><div class="fv">Himiko Sadiki · Century 21</div></div>
+      <div class="frow"><div class="fl">Commission</div><div class="fv" style="color:#D97706;font-weight:700">3% of $1.25M = $37,500</div></div>
+      <div class="frow"><div class="fl">Status</div><div class="fv"><span class="pill pill-yellow">Pending Send</span></div></div>
+      <div class="frow"><div class="fl">Invoice</div><div class="fv">AGENT-2026-0047</div></div>
+      <div style="padding:7px 16px;border-top:1px solid var(--border-light);display:flex;gap:4px"><button class="offer-btn" style="flex:1;text-align:center;font-size:9px;padding:3px 6px">View</button><button class="offer-btn" style="flex:1;text-align:center;font-size:9px;padding:3px 6px">Send Now</button><button class="offer-btn" style="flex:1;text-align:center;font-size:9px;padding:3px 6px">Edit & Send</button></div>
+    </div>
+  </div>
+  <div class="detail-right" style="flex:1;background:var(--bg)">
+    <div class="dtabs">
+      <div class="dtab active">Overview</div>
+      <div class="dtab">Tasks <span class="tb">5</span></div>
+      <div class="dtab">Documents <span class="tb">12</span></div>
+      <div class="dtab">Offers</div>
+      <div class="dtab">Timeline</div>
+    </div>
+    <div style="padding:16px">
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-hdr"><h3>📋 Next Steps (5 tasks)</h3></div>
+        <div class="task-list">
+          <div class="task-item"><div class="task-chk done">✓</div><div class="task-nm completed">Verbal Offer Accepted</div><div class="task-due">Completed Apr 1</div></div>
+          <div class="task-item"><div class="task-chk"></div><div class="task-nm">Submit Inspection Request to Seller</div><div class="task-due">Due Tomorrow</div></div>
+          <div class="task-item"><div class="task-chk"></div><div class="task-nm">Schedule Home Inspection</div><div class="task-due">Due Tomorrow</div></div>
+          <div class="task-item"><div class="task-chk"></div><div class="task-nm">Secure Loan Pre-Approval</div><div class="task-due overdue">Overdue — 2 days</div></div>
+          <div class="task-item"><div class="task-chk"></div><div class="task-nm">Review & Sign Purchase Agreement</div><div class="task-due">Due Apr 8</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 6: TASK PIPELINE -->
+<div class="mockup" id="s-pipeline">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Task Pipeline</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Task Pipeline</div><h2>Kanban Task Management</h2><p>Drag and drop tasks through the pipeline. Real-time collaboration and auto-save.</p></div>
+  <div class="page-hdr"><h1>Task Pipeline</h1><div class="sub">Kanban view of all transaction tasks</div></div>
+  <div class="kanban">
+    <div class="kcol"><div class="kcol-hdr"><div class="kcol-title">📋 To Do</div><div class="kcol-cnt">8</div></div><div class="kcard"><div class="kt">Submit Inspection Request</div><div class="ka">1428 Elm Street</div><div class="kf"><div class="kd">Today</div></div></div><div class="kcard"><div class="kt">Verify Loan Pre-Approval</div><div class="ka">550 Pine Drive</div><div class="kf"><div class="kd">Apr 5</div></div></div></div>
+    <div class="kcol"><div class="kcol-hdr"><div class="kcol-title">🔄 In Progress</div><div class="kcol-cnt">5</div></div><div class="kcard"><div class="kt">Review Counter Offer</div><div class="ka">550 Pine Drive</div><div class="kf"><div class="kd urgent">Due Today</div></div></div><div class="kcard"><div class="kt">Request Title Search</div><div class="ka">2200 Oak Avenue</div><div class="kf"><div class="kd">Apr 3</div></div></div></div>
+    <div class="kcol"><div class="kcol-hdr"><div class="kcol-title">👀 Review</div><div class="kcol-cnt">3</div></div><div class="kcard"><div class="kt">Loan Pre-Approval</div><div class="ka">2200 Oak Avenue</div><div class="kf"><div class="kd">Apr 3</div></div></div></div>
+    <div class="kcol"><div class="kcol-hdr"><div class="kcol-title">✓ Done</div><div class="kcol-cnt">22</div></div><div class="kcard"><div class="kt">Verbal Offer Accepted</div><div class="ka">1428 Elm Street</div><div class="kf"><div class="kd">Apr 1</div></div></div><div class="kcard"><div class="kt">Inspection Scheduled</div><div class="ka">550 Pine Drive</div><div class="kf"><div class="kd">Mar 30</div></div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 7: DOCUMENT EXPLORER -->
+<div class="mockup" id="s-docs">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Document Explorer</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Document Management</div><h2>Transaction Document Repository</h2><p>Centralized storage for all transaction documents. Organized by folder with full audit trail.</p></div>
+  <div class="page-hdr"><h1>Documents</h1><div class="sub">Full transaction document tree</div></div>
+  <div style="display:grid;grid-template-columns:250px 1fr;gap:16px;padding:0 20px 16px 20px">
+    <div class="card" style="max-height:500px;overflow-y:auto">
+      <div class="folder-tree">
+        <div class="folder">
+          <div class="folder-header active"><span class="folder-icon">📁</span> <span>1428 Elm Street</span><span class="folder-count">12</span></div>
+          <div class="subfolder"><div class="file-row">📄 CA RPA Purchase Agreement</div></div>
+          <div class="subfolder"><div class="file-row">📄 Inspection Report</div></div>
+          <div class="subfolder"><div class="file-row">📄 Appraisal</div></div>
+          <div class="subfolder"><div class="file-row">📄 Loan Pre-Approval</div></div>
+        </div>
+        <div class="folder">
+          <div class="folder-header"><span class="folder-icon">📁</span> <span>550 Pine Drive</span><span class="folder-count">8</span></div>
+        </div>
+        <div class="folder">
+          <div class="folder-header"><span class="folder-icon">📁</span> <span>2200 Oak Avenue</span><span class="folder-count">6</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h3>📋 Selected Folder: 1428 Elm Street (12 docs)</h3></div>
+      <table class="tbl">
+        <thead><tr><th>Document</th><th>Type</th><th>Uploaded</th><th>Size</th></tr></thead>
+        <tbody>
+          <tr><td>CA RPA Purchase Agreement</td><td><span class="pill pill-gold">Contract</span></td><td>Mar 25</td><td>245 KB</td></tr>
+          <tr><td>Inspection Report</td><td><span class="pill pill-blue">Report</span></td><td>Apr 2</td><td>1.2 MB</td></tr>
+          <tr><td>Appraisal</td><td><span class="pill pill-blue">Report</span></td><td>Apr 1</td><td>890 KB</td></tr>
+          <tr><td>Loan Pre-Approval</td><td><span class="pill pill-green">Finance</span></td><td>Mar 27</td><td>312 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 8: OFFERS HUB -->
+<div class="mockup" id="s-offers">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Offers Hub</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Offer Management</div><h2>All Pending & Active Offers</h2><p>Track offers by state and source. Review, edit, and send offers directly.</p></div>
+  <div class="page-hdr"><h1>Offers</h1><div class="sub">8 pending offers across active states — Launching CA, TX, NJ, NY, FL, IL · Architected for 50</div></div>
+  <div class="card" style="margin:12px 20px">
+    <table class="tbl">
+      <thead><tr><th>Property</th><th>State</th><th>Agent</th><th>Buyer</th><th>Price</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600">1428 Elm Street</td><td><span class="state-badge state-ca">CA</span></td><td>Himiko Sadiki</td><td>Jennifer Mills</td><td>$1,250,000</td><td><span class="pill pill-blue">Pending</span></td><td><span class="offer-src src-pp">PartnerPro</span></td></tr>
+        <tr><td style="font-weight:600">2200 Oak Avenue</td><td><span class="state-badge state-ca">CA</span></td><td>Himiko Sadiki</td><td>Marcus Thai</td><td>$875,500</td><td><span class="pill pill-yellow">Review</span></td><td><span class="offer-src src-man">Manual</span></td></tr>
+        <tr><td style="font-weight:600">8847 Market Street</td><td><span class="state-badge state-tx">TX</span></td><td>Marcus Johnson</td><td>Lisa Wang</td><td>$325,000</td><td><span class="pill pill-blue">Pending</span></td><td><span class="offer-src src-pp">PartnerPro</span></td></tr>
+        <tr><td style="font-weight:600">120 Brook Lane</td><td><span class="state-badge state-nj">NJ</span></td><td>Sarah Chen</td><td>David Kim</td><td>$450,000</td><td><span class="pill pill-green">Accepted</span></td><td><span class="offer-src src-pp">PartnerPro</span></td></tr>
+        <tr><td style="font-weight:600">555 Harbor Drive</td><td><span class="state-badge state-ca">CA</span></td><td>Joanne Smith</td><td>Patricia Cole</td><td>$2,100,000</td><td><span class="pill pill-purple">Counter-Offer</span></td><td><span class="offer-src src-auto">Automate</span></td></tr>
+        <tr><td style="font-weight:600">445 Park Avenue</td><td><span class="state-badge state-ny">NY</span></td><td>Rachel Torres</td><td>James Whitfield</td><td>$1,875,000</td><td><span class="pill pill-blue">Pending</span></td><td><span class="offer-src src-pp">PartnerPro</span></td></tr>
+        <tr><td style="font-weight:600">1200 Brickell Ave</td><td><span class="state-badge state-fl">FL</span></td><td>Damien Brooks</td><td>Ana Rodriguez</td><td>$685,000</td><td><span class="pill pill-yellow">Review</span></td><td><span class="offer-src src-pp">PartnerPro</span></td></tr>
+        <tr><td style="font-weight:600">880 N Michigan Ave</td><td><span class="state-badge state-il">IL</span></td><td>Kenji Watanabe</td><td>Maria Santos</td><td>$520,000</td><td><span class="pill pill-green">Accepted</span></td><td><span class="offer-src src-man">Manual</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 9: NOTIFICATIONS -->
+<div class="mockup" id="s-notifications">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Notifications</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Notification Center</div><h2>Activity & Alerts</h2><p>Real-time alerts for offers, documents, tasks, and system events.</p></div>
+  <div class="page-hdr"><h1>Notifications</h1><div class="sub">Recent activity across all transactions</div></div>
+  <div class="card" style="margin:12px 20px">
+    <div class="notif unread"><div class="notif-icon">📧</div><div class="notif-body"><div class="notif-title">New Offer from Agent</div><div class="notif-desc">Himiko submitted offer for 2200 Oak Avenue: $875,500</div><div class="notif-meta"><span class="notif-time">Now</span><span class="notif-channel ch-system">System</span></div></div></div>
+    <div class="notif"><div class="notif-icon">✓</div><div class="notif-body"><div class="notif-title">Document Signed</div><div class="notif-desc">Purchase Agreement signed by J. Donovan</div><div class="notif-meta"><span class="notif-time">2 hours ago</span><span class="notif-channel ch-email">Email</span></div></div></div>
+    <div class="notif"><div class="notif-icon">🚨</div><div class="notif-body"><div class="notif-title">Task Overdue</div><div class="notif-desc">Secure Loan Pre-Approval is now 2 days overdue for 1428 Elm Street</div><div class="notif-meta"><span class="notif-time">1 hour ago</span><span class="notif-channel ch-system">System</span></div></div></div>
+    <div class="notif"><div class="notif-icon">💬</div><div class="notif-body"><div class="notif-title">SMS Received</div><div class="notif-desc">Escrow officer: "Appraisal received. Will review and send approval"</div><div class="notif-meta"><span class="notif-time">45 min ago</span><span class="notif-channel ch-sms">SMS</span></div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 10: COMMS HUB -->
+<div class="mockup" id="s-comms">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Comms Hub</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Communications Center</div><h2>Email & SMS Templates</h2><p>Pre-built templates for offers, inspections, funding, and closing. Customize and send directly.</p></div>
+  <div class="page-hdr"><h1>Communications</h1><div class="sub">Templates & outbound messaging</div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px 16px 20px">
+    <div class="card">
+      <div class="card-hdr"><h3>📧 Email Templates</h3></div>
+      <div style="padding:12px">
+        <div class="template-card selected" style="margin-bottom:12px">
+          <div style="font-weight:700;margin-bottom:4px">Offer Submission</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Sent to buyer/seller when offer submitted</div>
+          <div style="display:flex;gap:6px"><button class="offer-btn">Edit</button><button class="offer-btn">Use</button></div>
+        </div>
+        <div class="template-card" style="margin-bottom:12px">
+          <div style="font-weight:700;margin-bottom:4px">Inspection Request</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Template for requesting home inspection</div>
+          <div style="display:flex;gap:6px"><button class="offer-btn">Edit</button><button class="offer-btn">Use</button></div>
+        </div>
+        <div class="template-card">
+          <div style="font-weight:700;margin-bottom:4px">Loan Pre-Approval</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Request pre-approval from lender</div>
+          <div style="display:flex;gap:6px"><button class="offer-btn">Edit</button><button class="offer-btn">Use</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h3>📱 SMS Templates</h3></div>
+      <div style="padding:12px">
+        <div class="template-card" style="margin-bottom:12px">
+          <div style="font-weight:700;margin-bottom:4px">Offer Update Alert</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Quick SMS on offer status</div>
+          <div style="display:flex;gap:6px"><button class="offer-btn">Edit</button><button class="offer-btn">Use</button></div>
+        </div>
+        <div class="template-card">
+          <div style="font-weight:700;margin-bottom:4px">Document Reminder</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Remind signer to complete docs</div>
+          <div style="display:flex;gap:6px"><button class="offer-btn">Edit</button><button class="offer-btn">Use</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 11: DOCUSIGN HUB -->
+<div class="mockup" id="s-signing">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">DocuSign Hub</div></div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Digital Signatures</div><h2>DocuSign Management</h2><p>State-specific contract templates. CA RPA, TX TREC, NJ Contract of Sale. Send, track, and manage signatures.</p></div>
+  <div class="page-hdr"><h1>DocuSign Integration</h1><div class="sub">All envelopes and templates by state</div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px 16px 20px">
+    <div class="card">
+      <div class="card-hdr"><h3>📨 Recent Envelopes <span class="cnt">24</span></h3></div>
+      <div style="max-height:400px;overflow-y:auto">
+        <div class="env-row"><div class="env-status env-pending"></div><div style="flex:1"><div style="font-weight:600;font-size:11px">Inspection Response</div><div style="font-size:10px;color:var(--text-secondary)">1428 Elm St (CA) · Himiko</div></div><span class="pill pill-yellow" style="font-size:8px">Pending</span></div>
+        <div class="env-row"><div class="env-status env-signed"></div><div style="flex:1"><div style="font-weight:600;font-size:11px">CA RPA Purchase Agreement</div><div style="font-size:10px;color:var(--text-secondary)">550 Pine Dr (CA) · Joanne</div></div><span class="pill pill-green" style="font-size:8px">Signed</span></div>
+        <div class="env-row"><div class="env-status env-sent"></div><div style="flex:1"><div style="font-weight:600;font-size:11px">TX TREC 1-4 Agreement</div><div style="font-size:10px;color:var(--text-secondary)">8847 Market St (TX) · Marcus</div></div><span class="pill pill-blue" style="font-size:8px">Sent</span></div>
+        <div class="env-row"><div class="env-status env-signed"></div><div style="flex:1"><div style="font-weight:600;font-size:11px">NJ Contract of Sale</div><div style="font-size:10px;color:var(--text-secondary)">120 Brook Ln (NJ) · Sarah</div></div><span class="pill pill-green" style="font-size:8px">Signed</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><h3>📋 Templates by State <span class="cnt">6 active · 50 supported</span></h3></div>
+      <div style="padding:12px">
+        <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-ca">CA</span> RPA — Purchase Agreement</div>
+          <span class="pill pill-gold" style="font-size:8px">Most Used (23 sent)</span>
+        </div>
+        <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-tx">TX</span> TREC 1-4 Agreement</div>
+          <span style="font-size:9px;color:var(--text-muted)">Texas Standard Form (4 sent)</span>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-nj">NJ</span> Contract of Sale</div>
+          <span style="font-size:9px;color:var(--text-muted)">New Jersey Standard (2 sent)</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light)">
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-ny">NY</span> NYS Contract of Sale</div>
+          <span style="font-size:9px;color:var(--text-muted)">New York Association (1 sent)</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light)">
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-fl">FL</span> FAR/BAR Contract</div>
+          <span style="font-size:9px;color:var(--text-muted)">Florida Standard (3 sent)</span>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light)">
+          <div style="font-weight:700;font-size:11px;margin-bottom:4px"><span class="state-badge state-il">IL</span> Multi-Board Contract</div>
+          <span style="font-size:9px;color:var(--text-muted)">Illinois Standard (1 sent)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 12: SETTINGS / ORG CONFIG -->
+<div class="mockup" id="s-settings">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Settings</div></div>
+  <div class="nav-sec">Account</div>
+  <div class="nav-item"><span class="icon">👤</span> Profile</div>
+  <div class="nav-item"><span class="icon">🏢</span> Company</div>
+  <div class="nav-item"><span class="icon">📊</span> Billing & Subscription</div>
+  <div class="nav-sec">Integrations</div>
+  <div class="nav-item"><span class="icon">🔔</span> Notifications</div>
+  <div class="nav-item"><span class="icon">🔗</span> Integrations</div>
+  <div class="nav-item"><span class="icon">👥</span> Team</div>
+  <div class="nav-item active"><span class="icon">⚙️</span> Org Settings</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Organization Settings</div><h2>Master Configuration</h2><p>Bank details, TC fees, state config, integrations, and task templates. Only Director can edit.</p></div>
+
+  <div class="page-hdr">
+    <div><h1>Org Settings</h1><div class="sub">Organization-wide configuration</div></div>
+  </div>
+
+  <div class="settings-tabs">
+    <div class="st-tab">Profile</div>
+    <div class="st-tab">Company</div>
+    <div class="st-tab">Billing & Subscription</div>
+    <div class="st-tab">Notifications</div>
+    <div class="st-tab">Integrations</div>
+    <div class="st-tab">Team</div>
+    <div class="st-tab active">Org Settings</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px 16px 20px">
+    <div class="card">
+      <div class="card-hdr"><h3>🏦 Bank Details</h3></div>
+      <div style="padding:14px 16px;font-size:11px">
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">ACCOUNT NAME</div>
+          <div style="font-weight:700">Automate Your Real Estate, Inc.</div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">ROUTING NUMBER</div>
+          <div style="font-weight:700">121000248</div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">ACCOUNT NUMBER</div>
+          <div style="font-weight:700">••••••••3456</div>
+        </div>
+        <button class="btn btn-outline" style="width:100%;padding:8px;justify-content:center;font-size:10px">Edit</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><h3>💰 TC Fee Structure</h3></div>
+      <div style="padding:14px 16px;font-size:11px">
+        <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary)">PER TRANSACTION</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:var(--gold)">$450</div>
+          <div style="font-size:9px;color:var(--text-muted)">Auto-invoiced to escrow</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary)">TIERED COMMISSION (Future)</div>
+          <div style="font-size:9px;color:var(--text-muted)">Volume-based discounts coming Q3</div>
+        </div>
+        <button class="btn btn-outline" style="width:100%;padding:8px;justify-content:center;font-size:10px;margin-top:8px">Edit Fee</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><h3>🗺️ Active States</h3></div>
+      <div style="padding:14px 16px;font-size:11px">
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--gold-subtle);border-radius:6px;border:1px solid rgba(193,154,62,.2)"><span><span class="state-badge state-ca">CA</span> California</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--border-light);border-radius:6px"><span><span class="state-badge state-tx">TX</span> Texas</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--border-light);border-radius:6px"><span><span class="state-badge state-nj">NJ</span> New Jersey</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--border-light);border-radius:6px"><span><span class="state-badge state-ny">NY</span> New York</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--border-light);border-radius:6px"><span><span class="state-badge state-fl">FL</span> Florida</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--border-light);border-radius:6px"><span><span class="state-badge state-il">IL</span> Illinois</span><span style="color:var(--success);font-weight:700;font-size:10px">Active</span></div>
+        <div style="margin-top:10px;padding:8px 10px;border:2px dashed var(--border);border-radius:6px;text-align:center;color:var(--text-muted);cursor:pointer;font-size:10px;font-weight:600">+ Add State</div>
+        <div style="margin-top:6px;font-size:9px;color:var(--text-muted);text-align:center">Architected for all 50 states · Add form templates per state</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><h3>🔗 Integrations</h3></div>
+      <div style="padding:14px 16px;font-size:11px">
+        <div style="margin-bottom:12px;padding:10px;background:var(--gold-subtle);border-radius:6px;border:1px solid rgba(193,154,62,.2)">
+          <div style="font-size:10px;font-weight:600;color:var(--gold);margin-bottom:4px">DOCUSIGN</div>
+          <div style="font-weight:700">Automate Your Real Estate</div>
+          <div style="font-size:9px;color:var(--text-muted)">Master Org Account · Connected</div>
+        </div>
+        <div style="margin-bottom:12px;padding:10px;background:var(--border-light);border-radius:6px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">STRIPE</div>
+          <div style="font-weight:700">acct_1S025GF...ePkE</div>
+          <div style="font-size:9px;color:var(--text-muted)">TC Desk Pro $49/mo · Connected</div>
+        </div>
+        <div style="margin-bottom:12px;padding:10px;background:var(--border-light);border-radius:6px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">TELENEX (SMS)</div>
+          <div style="font-weight:700">SMS + Email Notifications</div>
+          <div style="font-size:9px;color:var(--text-muted)">Agent + Client dual notifications · Connected</div>
+        </div>
+        <div style="padding:10px;background:var(--border-light);border-radius:6px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-secondary);margin-bottom:4px">PARTNERPRO (WEBHOOK)</div>
+          <div style="font-weight:700">Offer Intake Pipeline</div>
+          <div style="font-size:9px;color:var(--text-muted)">Auto-receives offers + agent data · Connected</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-hdr"><h3>📋 Standard Task Templates</h3></div>
+      <div style="padding:16px">
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;margin-bottom:8px">🏠 Buyer Transactions (CA)</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Submit Pre-Approval</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Inspect Property</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Review Title Report</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Sign RPA</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;margin-bottom:8px">🏡 Seller Transactions (CA)</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Prepare Listing Docs</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Review Counter Offers</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Schedule Inspection</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Finalize Contract</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;margin-bottom:8px"><span class="state-badge state-tx">TX</span> Buyer Transactions (Texas)</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Submit TREC 1-4 Contract</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Option Period (10 days)</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Title Commitment Review</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Survey Ordered</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-light)">
+          <div style="font-weight:700;margin-bottom:8px"><span class="state-badge state-ny">NY</span> / <span class="state-badge state-nj">NJ</span> Buyer Transactions (Attorney Review States)</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Attorney Review (3-5 days)</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Home Inspection</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Mortgage Commitment</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Title Search + Insurance</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:8px"><span class="state-badge state-fl">FL</span> / <span class="state-badge state-il">IL</span> Buyer Transactions</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Submit FAR/BAR or Multi-Board Contract</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Inspection Period (15 days FL)</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">HOA/Condo Docs Review</div>
+            <div style="padding:6px;background:var(--border-light);border-radius:6px;font-size:10px">Clear to Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SCREEN 13: SUBSCRIPTION / BILLING -->
+<div class="mockup" id="s-billing">
+<div class="sidebar">
+  <div class="sidebar-logo"><h2>TC <span>Desk</span></h2><div class="sub">Billing</div></div>
+  <div class="nav-item" style="font-size:11px;color:var(--text-secondary);padding:9px 20px">Subscription & Billing</div>
+  <div class="sidebar-footer"><div class="user"><div class="avatar">CV</div><div><div class="name">Christianna V.</div><div class="role">Director of Operations</div></div></div></div>
+</div>
+<div class="main">
+  <div class="fbo"><div class="tag">✦ Billing & Subscription</div><h2>Subscription Management</h2><p>View your plan, manage billing, track team accounts, and download invoices.</p></div>
+
+  <div class="page-hdr">
+    <div><h1>Subscription</h1><div class="sub">Manage your TC Desk plan and billing</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 20px 16px 20px">
+    <!-- Left: Plans -->
+    <div>
+      <div class="card" style="margin-bottom:16px;border:2px solid var(--gold)">
+        <div style="padding:14px 16px;background:var(--gold-subtle);border-bottom:1px solid var(--border)">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800">TC Desk Pro</div>
+            <span class="pill pill-green">Active</span>
+          </div>
+        </div>
+        <div style="padding:16px">
+          <div style="margin-bottom:16px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:32px;font-weight:800;color:var(--gold)">$49</span>
+            <span style="font-size:12px;color:var(--text-secondary)">/month</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-secondary);line-height:2;margin-bottom:16px">
+            <div>✓ 1 TC workspace</div>
+            <div>✓ Up to 10 agents</div>
+            <div>✓ Task management</div>
+            <div>✓ Document explorer</div>
+            <div>✓ Offer tracking</div>
+            <div>✓ Email/SMS triggers</div>
+            <div>✓ DocuSign integration</div>
+            <div>✓ Standard support</div>
+            <div>✓ Broker demand automation</div>
+          </div>
+          <button class="btn btn-outline" style="width:100%;padding:10px;justify-content:center">Current Plan</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr"><h3>📅 Billing Cycle</h3></div>
+        <div style="padding:14px 16px;font-size:11px">
+          <div style="margin-bottom:8px">
+            <div style="font-size:10px;font-weight:600;color:var(--text-secondary)">NEXT BILLING DATE</div>
+            <div style="font-weight:700">May 4, 2026</div>
+          </div>
+          <div style="margin-bottom:8px">
+            <div style="font-size:10px;font-weight:600;color:var(--text-secondary)">AUTO-RENEWAL</div>
+            <div style="font-weight:700;color:var(--success)">Enabled</div>
+          </div>
+          <button class="btn btn-outline" style="width:100%;padding:8px;justify-content:center;font-size:10px;margin-top:8px">Manage Billing</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Billing Info -->
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-hdr"><h3>💳 Payment Method</h3></div>
+        <div style="padding:14px 16px;font-size:11px">
+          <div style="margin-bottom:12px;padding:10px;background:var(--gold-subtle);border-radius:6px;border:1px solid var(--gold)">
+            <div style="font-size:10px;font-weight:600;color:var(--gold);margin-bottom:4px">STRIPE</div>
+            <div style="font-size:11px;font-weight:700">Visa ending in 4242</div>
+            <div style="font-size:9px;color:var(--text-muted)">Expires 12/2027</div>
+          </div>
+          <button class="btn btn-outline" style="width:100%;padding:8px;justify-content:center;font-size:10px">Update Card</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr"><h3>👥 Team Accounts</h3></div>
+        <div style="padding:12px 16px;font-size:11px">
+          <div style="margin-bottom:8px;padding:8px;background:var(--border-light);border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:600">Christianna V.</span>
+            <span style="background:var(--gold-subtle);color:var(--gold);padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700">Admin</span>
+          </div>
+          <div style="padding:8px;background:var(--border-light);border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:600">Fred A.</span>
+            <span style="color:var(--text-secondary);font-size:10px">TC · Free</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card-hdr"><h3>📄 Invoice History</h3></div>
+        <div style="padding:12px 16px;font-size:11px">
+          <div style="padding:6px 0;border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between">
+            <span>April 4, 2026</span>
+            <span style="font-weight:700">$49.00</span>
+          </div>
+          <div style="padding:6px 0;display:flex;justify-content:space-between">
+            <span>Mar 4, 2026</span>
+            <span style="font-weight:700">$49.00</span>
+          </div>
+          <button class="btn btn-outline" style="width:100%;padding:8px;justify-content:center;font-size:10px;margin-top:8px">View All Invoices</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.mockup').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
